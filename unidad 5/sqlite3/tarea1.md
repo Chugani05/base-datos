@@ -1,4 +1,5 @@
 
+## Creación de tabla
 ```sql
 create table Ejemplo (
 id integer primary key,
@@ -7,7 +8,10 @@ entero integer,
 decimal real,
 fecha date,
 booleano boolean );
+```
 
+## Inserción de valores
+```sql
 insert into Ejemplo (id, texto, entero, decimal, fecha, booleano)
 values (1, 'Ejemplo1', 25, '10.5', '2022-05-15', '0'),
 (2, 'Ejemplo2', 63, '45.7', '2022-06-22', '1'),
@@ -60,3 +64,10 @@ values (1, 'Ejemplo1', 25, '10.5', '2022-05-15', '0'),
 (49, 'Ejemplo49', 28, '50.0', '2026-05-25', '0'),
 (50, 'Ejemplo50', 75, '85.3', '2026-06-11', '1');
 ```
+## Consultas
+### Obtén todas las entradas de la tabla Ejemplo.
+```sql
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen1.png'>
+
