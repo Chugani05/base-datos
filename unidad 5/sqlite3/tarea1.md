@@ -64,6 +64,7 @@ values (1, 'Ejemplo1', 25, '10.5', '2022-05-15', '0'),
 (49, 'Ejemplo49', 28, '50.0', '2026-05-25', '0'),
 (50, 'Ejemplo50', 75, '85.3', '2026-06-11', '1');
 ```
+
 ## Consultas
 ### Obtén todas las entradas de la tabla Ejemplo.
 ```sql
@@ -71,3 +72,51 @@ select * from Ejemplo;
 ```
 <img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen1.png'>
 
+### Obtén las entradas con el campo entero mayor a 50.
+```sql
+select entero from Ejemplo where entero>50;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen2.png'>
+
+## Eliminaciones y Modificaciones
+### Elimina las entradas donde el campo booleano es igual a True.
+```sql
+delete from Ejemplo where booleano=1;
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen3.png'>
+
+### Modifica el campo texto de las entradas donde el campo entero es menor a 30 y establece el texto como "Modificado".
+```sql
+update Ejemplo set texto='Modificado' where entero<30;
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen5.png'>
+
+### Elimina las entradas donde el campo entero es igual a 50.
+```sql
+delete from Ejemplo where entero=50;
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen4.png'>
+
+### Incrementa en 10 el valor del campo entero para las entradas donde el campo booleano es igual a False.
+```sql
+update Ejemplo set entero=entero + 10 where booleano=0;
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen6.png'>
+
+### Elimina las entradas donde el campo decimal es menor a 50.
+```sql
+delete from Ejemplo where decimal<50;
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen7.png'>
+
+### Actualiza el campo fecha de todas las entradas a la fecha actual.
+```sql
+update Ejemplo set fecha=current_date;
+select * from Ejemplo;
+```
+<img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen8.png'>
