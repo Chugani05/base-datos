@@ -119,4 +119,13 @@ select * from Ejemplo;
 update Ejemplo set fecha=current_date;
 select * from Ejemplo;
 ```
+```sql
++----+------------+--------+---------+------------+----------+
+| id |   texto    | entero | decimal |   fecha    | booleano |
++----+------------+--------+---------+------------+----------+
+| 9  | Ejemplo9   | 41     | 55.0    | 2023-12-15 | 0        |
+| 29 | Modificado | 37     | 50.0    | 2023-12-15 | 0        |
+| 49 | Modificado | 38     | 50.0    | 2023-12-15 | 0        |
++----+------------+--------+---------+------------+----------+
+```
 <img src='/home/chugani/bae/base-datos/unidad 5/imagenes/imagen8.png'>
