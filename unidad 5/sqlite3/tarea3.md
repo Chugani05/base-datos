@@ -48,11 +48,8 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 ```sql
 select upper(nombre) as nombre_mayusculas from empleados;
 ```
-```sql
-+-------------------+
 | nombre_mayusculas |
-+-------------------+
-| JUAN              |
+|-------------------|
 | JUAN              |
 | MARíA             |
 | CARLOS            |
@@ -73,17 +70,13 @@ select upper(nombre) as nombre_mayusculas from empleados;
 | NATALIA           |
 | ROBERTO           |
 | BEATRIZ           |
-+-------------------+
-```
+
 ### Calcula el valor absoluto del salario de todos los empleados.
 ```sql
 select nombre, abs(salario) as salario_absoluto from empleados;
 ```
-```sql
-+-----------+------------------+
 |  nombre   | salario_absoluto |
-+-----------+------------------+
-| Juan      | 50000.0          |
+|-----------|------------------|
 | Juan      | 50000.0          |
 | María     | 60000.0          |
 | Carlos    | 55000.0          |
@@ -104,50 +97,37 @@ select nombre, abs(salario) as salario_absoluto from empleados;
 | Natalia   | 54000.0          |
 | Roberto   | 49000.0          |
 | Beatriz   | 63000.0          |
-+-----------+------------------+
-```
+
 ### Muestra la fecha actual.
 ```sql
 select current_date as fecha_actual from empleados limit 1;
 ```
-```sql
-+--------------+
 | fecha_actual |
-+--------------+
+|--------------|
 | 2024-01-17   |
-+--------------+
-```
+
 ### Calcula el promedio de salarios de todos los empleados.
 ```sql
 select avg(salario) as promidio_salario from empleados;
 ```
-```sql
-+------------------+
 | promidio_salario |
-+------------------+
+|------------------|
 | 56666.6666666667 |
-+------------------+
-```
+
 ### Convierte la cadena '123' a un valor entero.
 ```sql
 select cast('123' as integer) as valor_entero;
 ```
-```sql
-+--------------+
 | valor_entero |
-+--------------+
+|--------------|
 | 123          |
-+--------------+
-```
+
 ### Concatena el nombre y el departamento de cada empleado.
 ```sql
 select nombre || ' ' || departamento as nombre_departamento from empleados;
 ```
-```sql
-+---------------------------+
 |    nombre_departamento    |
-+---------------------------+
-| Juan Ventas               |
+|---------------------------|
 | Juan Ventas               |
 | María TI                  |
 | Carlos Ventas             |
@@ -168,61 +148,206 @@ select nombre || ' ' || departamento as nombre_departamento from empleados;
 | Natalia Ventas            |
 | Roberto Recursos Humanos  |
 | Beatriz TI                |
-+---------------------------+
-```
+
 ### Concatena el nombre y el departamento de cada empleado con un guion como separador.
 ```sql
+select nombre || '-' || departamento as nombre_departamento from empleados;
 ```
-```sql
-```
+|    nombre_departamento    |
+|---------------------------|
+| Juan-Ventas               |
+| María-TI                  |
+| Carlos-Ventas             |
+| Ana-Recursos Humanos      |
+| Pedro-TI                  |
+| Laura-Ventas              |
+| Javier-Recursos Humanos   |
+| Carmen-TI                 |
+| Miguel-Ventas             |
+| Elena-Recursos Humanos    |
+| Diego-TI                  |
+| Sofía-Ventas              |
+| Andrés-Recursos Humanos   |
+| Isabel-TI                 |
+| Raúl-Ventas               |
+| Patricia-Recursos Humanos |
+| Alejandro-TI              |
+| Natalia-Ventas            |
+| Roberto-Recursos Humanos  |
+| Beatriz-TI                |
+
 ### Categoriza a los empleados según sus salarios.
 ```sql
+select nombre, salario from empleados order by nombre, salario asc; 
 ```
-```sql
-```
+|  nombre   | salario |
+|-----------|---------|
+| Alejandro | 71000.0 |
+| Ana       | 48000.0 |
+| Andrés    | 60000.0 |
+| Beatriz   | 63000.0 |
+| Carlos    | 55000.0 |
+| Carmen    | 65000.0 |
+| Diego     | 72000.0 |
+| Elena     | 55000.0 |
+| Isabel    | 53000.0 |
+| Javier    | 48000.0 |
+| Juan      | 50000.0 |
+| Laura     | 52000.0 |
+| María     | 60000.0 |
+| Miguel    | 51000.0 |
+| Natalia   | 54000.0 |
+| Patricia  | 47000.0 |
+| Pedro     | 70000.0 |
+| Raúl      | 68000.0 |
+| Roberto   | 49000.0 |
+| Sofía     | 49000.0 |
+
 ### Calcula la suma total de salarios de todos los empleados.
 ```sql
+select sum(salario) as suma_salario from empleados;
 ```
-```sql
-```
+| suma_salario |
+|--------------|
+| 1140000.0    |
+
 ### Redondea el salario de todos los empleados a dos decimales.
 ```sql
+select round(salario, 2) as redondeo_salario from empleados;
 ```
-```sql
-```
+| redondeo_salario |
++------------------+
+| 50000.0          |
+| 60000.0          |
+| 55000.0          |
+| 48000.0          |
+| 70000.0          |
+| 52000.0          |
+| 48000.0          |
+| 65000.0          |
+| 51000.0          |
+| 55000.0          |
+| 72000.0          |
+| 49000.0          |
+| 60000.0          |
+| 53000.0          |
+| 68000.0          |
+| 47000.0          |
+| 71000.0          |
+| 54000.0          |
+| 49000.0          |
+| 63000.0          |
+
 ### Muestra la longitud de cada nombre de empleado.
 ```sql
+select nombre, length(nombre) as longitud_nombre from empleados;
 ```
-```sql
-```
+|  nombre   | longitud_nombre |
+|-----------|-----------------|
+| Juan      | 4               |
+| María     | 5               |
+| Carlos    | 6               |
+| Ana       | 3               |
+| Pedro     | 5               |
+| Laura     | 5               |
+| Javier    | 6               |
+| Carmen    | 6               |
+| Miguel    | 6               |
+| Elena     | 5               |
+| Diego     | 5               |
+| Sofía     | 5               |
+| Andrés    | 6               |
+| Isabel    | 6               |
+| Raúl      | 4               |
+| Patricia  | 8               |
+| Alejandro | 9               |
+| Natalia   | 7               |
+| Roberto   | 7               |
+| Beatriz   | 7               |
+
 ### Cuenta el número total de empleados en cada departamento.
 ```sql
+select departamento, count(*) from empleados group by departamento;
 ```
-```sql
-```
+|   departamento   | count(*) |
+|------------------|----------|
+| Recursos Humanos | 6        |
+| TI               | 7        |
+| Ventas           | 7        |
+
 ### Muestra la hora actual.
 ```sql
+select current_time;
 ```
-```sql
-```
+| current_time |
+|--------------|
+| 19:21:18     |
+
 ### Convierte el salario a un valor de punto flotante.
 ```sql
+select nombre, cast(salario as float) as salario_float from empleados;
 ```
-```sql
-```
+|  nombre   | salario_float |
+|-----------|---------------|
+| Juan      | 50000.0       |
+| María     | 60000.0       |
+| Carlos    | 55000.0       |
+| Ana       | 48000.0       |
+| Pedro     | 70000.0       |
+| Laura     | 52000.0       |
+| Javier    | 48000.0       |
+| Carmen    | 65000.0       |
+| Miguel    | 51000.0       |
+| Elena     | 55000.0       |
+| Diego     | 72000.0       |
+| Sofía     | 49000.0       |
+| Andrés    | 60000.0       |
+| Isabel    | 53000.0       |
+| Raúl      | 68000.0       |
+| Patricia  | 47000.0       |
+| Alejandro | 71000.0       |
+| Natalia   | 54000.0       |
+| Roberto   | 49000.0       |
+| Beatriz   | 63000.0       |
+
 ### Muestra los primeros tres caracteres de cada nombre de empleado.
 ```sql
+select nombre, substr(nombre, 1, 3) as sub_nombre from empleados;
 ```
-```sql
-```
-
+|  nombre   | sub_nombre |
+|-----------|------------|
+| Juan      | Jua        |
+| María     | Mar        |
+| Carlos    | Car        |
+| Ana       | Ana        |
+| Pedro     | Ped        |
+| Laura     | Lau        |
+| Javier    | Jav        |
+| Carmen    | Car        |
+| Miguel    | Mig        |
+| Elena     | Ele        |
+| Diego     | Die        |
+| Sofía     | Sof        |
+| Andrés    | And        |
+| Isabel    | Isa        |
+| Raúl      | Raú        |
+| Patricia  | Pat        |
+| Alejandro | Ale        |
+| Natalia   | Nat        |
+| Roberto   | Rob        |
+| Beatriz   | Bea        |
 
 ## Order By and Like.
 ### Empleados en el departamento de 'Ventas' con salarios superiores a 52000.
 ```sql
+select nombre, salario from empleados where departamento='Ventas' and salario>52000;
 ```
-```sql
-```
+| nombre  | salario |
+|---------|---------|
+| Carlos  | 55000.0 |
+| Raúl    | 68000.0 |
+| Natalia | 54000.0 |
+
 ### Empleados cuyos nombres contienen la letra 'a' y tienen salarios ordenados de manera ascendente.
 ```sql
 ```
