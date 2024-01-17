@@ -350,46 +350,145 @@ select nombre, salario from empleados where departamento='Ventas' and salario>52
 
 ### Empleados cuyos nombres contienen la letra 'a' y tienen salarios ordenados de manera ascendente.
 ```sql
+select nombre, salario from empleados where nombre like'%a%' order by salario asc;
 ```
-```sql
-```
+|  nombre   | salario |
+|-----------|---------|
+| Patricia  | 47000.0 |
+| Ana       | 48000.0 |
+| Javier    | 48000.0 |
+| Sofía     | 49000.0 |
+| Juan      | 50000.0 |
+| Laura     | 52000.0 |
+| Isabel    | 53000.0 |
+| Natalia   | 54000.0 |
+| Carlos    | 55000.0 |
+| Elena     | 55000.0 |
+| María     | 60000.0 |
+| Andrés    | 60000.0 |
+| Beatriz   | 63000.0 |
+| Carmen    | 65000.0 |
+| Raúl      | 68000.0 |
+| Alejandro | 71000.0 |
+
 ### Empleados en el departamento 'Recursos Humanos' con salarios entre 45000 y 55000.
 ```sql
+select nombre, salario from empleados where departamento='Recursos Humanos' and salario between 45000 and 55000;
 ```
-```sql
-```
+|  nombre  | salario |
+|----------|---------|
+| Ana      | 48000.0 |
+| Javier   | 48000.0 |
+| Elena    | 55000.0 |
+| Patricia | 47000.0 |
+| Roberto  | 49000.0 |
+
 ### Empleados con salarios en orden descendente, limitando a los primeros 5 resultados.
 ```sql
+select nombre, salario from empleados order by salario desc limit 5;
 ```
-```sql
-```
+|  nombre   | salario |
+|-----------|---------|
+| Diego     | 72000.0 |
+| Alejandro | 71000.0 |
+| Pedro     | 70000.0 |
+| Raúl      | 68000.0 |
+| Carmen    | 65000.0 |
+
 ### Empleados cuyos nombres comienzan con 'M' o 'N' y tienen salarios superiores a 50000.
 ```sql
+select nombre, salario from empleados where (nombre like 'M%' or nombre like 'N%') and salario > 50000;
 ```
-```sql
-```
++---------+---------+
+| nombre  | salario |
++---------+---------+
+| María   | 60000.0 |
+| Miguel  | 51000.0 |
+| Natalia | 54000.0 |
++---------+---------+
+
 ### Empleados en el departamento 'TI' o 'Ventas' ordenados alfabéticamente por nombre.
 ```sql
+select nombre, departamento from empleados where departamento in ('TI', 'Ventas') order by nombre;
 ```
-```sql
-```
+|  nombre   | departamento |
+|-----------|--------------|
+| Alejandro | TI           |
+| Beatriz   | TI           |
+| Carlos    | Ventas       |
+| Carmen    | TI           |
+| Diego     | TI           |
+| Isabel    | TI           |
+| Juan      | Ventas       |
+| Laura     | Ventas       |
+| María     | TI           |
+| Miguel    | Ventas       |
+| Natalia   | Ventas       |
+| Pedro     | TI           |
+| Raúl      | Ventas       |
+| Sofía     | Ventas       |
+
 ### Empleados con salarios únicos (eliminando duplicados) en orden ascendente.
 ```sql
+select distinct (salario) from empleados order by salario asc;
 ```
-```sql
-```
+| salario |
+|---------|
+| 47000.0 |
+| 48000.0 |
+| 49000.0 |
+| 50000.0 |
+| 51000.0 |
+| 52000.0 |
+| 53000.0 |
+| 54000.0 |
+| 55000.0 |
+| 60000.0 |
+| 63000.0 |
+| 65000.0 |
+| 68000.0 |
+| 70000.0 |
+| 71000.0 |
+| 72000.0 |
+
 ### Empleados cuyos nombres terminan con 'o' o 'a' y están en el departamento 'Ventas'.
 ```sql
+select nombre from empleados where (nombre like '%o' or nombre like '%a') and departamento='Ventas';
 ```
-```sql
-```
+| nombre  |
+|---------|
+| Laura   |
+| Sofía   |
+| Natalia |
+
 ### Empleados con salarios fuera del rango de 55000 a 70000, ordenados por departamento.
 ```sql
+select nombre, salario, departamento from empleados where salario not between 55000 and 70000 order by departamento;
 ```
-```sql
-```
+|  nombre   | salario |   departamento   |
+|-----------|---------|------------------|
+| Ana       | 48000.0 | Recursos Humanos |
+| Javier    | 48000.0 | Recursos Humanos |
+| Patricia  | 47000.0 | Recursos Humanos |
+| Roberto   | 49000.0 | Recursos Humanos |
+| Diego     | 72000.0 | TI               |
+| Isabel    | 53000.0 | TI               |
+| Alejandro | 71000.0 | TI               |
+| Juan      | 50000.0 | Ventas           |
+| Laura     | 52000.0 | Ventas           |
+| Miguel    | 51000.0 | Ventas           |
+| Sofía     | 49000.0 | Ventas           |
+| Natalia   | 54000.0 | Ventas           |
+
 ### Empleados en el departamento 'Recursos Humanos' con nombres que no contienen la letra 'e'.
 ```sql
+select nombre from empleados where departamento='Recursos Humanos' and nombre not like '%e';
 ```
-```sql
-```
+|  nombre  |
+|----------|
+| Ana      |
+| Javier   |
+| Elena    |
+| Andrés   |
+| Patricia |
+| Roberto  |
