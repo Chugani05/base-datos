@@ -1,5 +1,5 @@
 ## Creación de fichero empleados-dump.sql.
-Creamos un fichero nano en el que insertamos la información proporcionada debajo con el siguente comando:
+Creamos el fichero nano empleados-dump.sql en el que insertamos la información proporcionada debajo con el siguente comando:
 ```sql
 nano empleados-dump.sql
 ```

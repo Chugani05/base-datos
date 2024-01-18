@@ -67,10 +67,8 @@ values ('Ford', 'Fiesta', 2019, 1),
 ```sql
 select * from Propietarios;
 ```
-```sql
-+----+----------+-----------+-----------+
 | id |  nombre  | apellido  |    dni    |
-+----+----------+-----------+-----------+
+|----|----------|-----------|-----------|
 | 1  | Juan     | Perez     | 12345678A |
 | 2  | Maria    | Lopez     | 87654321B |
 | 3  | Carlos   | Ruiz      | 11111111C |
@@ -91,16 +89,13 @@ select * from Propietarios;
 | 18 | Clara    | Soto      | 16161616R |
 | 19 | Sergio   | Mendoza   | 17171717S |
 | 20 | Patricia | Navarro   | 18181818T |
-+----+----------+-----------+-----------+
-```
+
 ### Listar todos los vehículos.
 ```sql
 select * from Vehiculos;
 ```
-```sql
-+----+------------+------------+------+----------------+
 | id |   marca    |   modelo   | anio | id_propietario |
-+----+------------+------------+------+----------------+
+|----|------------|------------|------|----------------|
 | 1  | Ford       | Fiesta     | 2019 | 1              |
 | 2  | Toyota     | Corolla    | 2018 | 2              |
 | 3  | Nissan     | Sentra     | 2020 | 3              |
@@ -121,16 +116,13 @@ select * from Vehiculos;
 | 18 | Toyota     | Highlander | 2020 | 18             |
 | 19 | Honda      | Odyssey    | 2016 | 19             |
 | 20 | Nissan     | Murano     | 2019 | 20             |
-+----+------------+------------+------+----------------+
-```
+
 ### Seleccionar solo los nombres y apellidos de los propietarios.
 ```sql
 select nombre, apellido from Propietarios;
 ```
-```sql
-+----------+-----------+
 |  nombre  | apellido  |
-+----------+-----------+
+|----------|-----------|
 | Juan     | Perez     |
 | Maria    | Lopez     |
 | Carlos   | Ruiz      |
@@ -151,16 +143,13 @@ select nombre, apellido from Propietarios;
 | Clara    | Soto      |
 | Sergio   | Mendoza   |
 | Patricia | Navarro   |
-+----------+-----------+
-```
+
 ### Listar todas las marcas y modelos de los vehículos.
 ```sql
 select marca, modelo from Vehiculos;
 ```
-```sql
-+------------+------------+
 |   marca    |   modelo   |
-+------------+------------+
+|------------|------------|
 | Ford       | Fiesta     |
 | Toyota     | Corolla    |
 | Nissan     | Sentra     |
@@ -181,90 +170,67 @@ select marca, modelo from Vehiculos;
 | Toyota     | Highlander |
 | Honda      | Odyssey    |
 | Nissan     | Murano     |
-+------------+------------+
 
-```
 ### Seleccionar solo los propietarios con apellido "Perez".
 ```sql
 select nombre, apellido from Propietarios where apellido='Perez';
 ```
-```sql
-+--------+----------+
 | nombre | apellido |
-+--------+----------+
+|--------|----------|
 | Juan   | Perez    |
-+--------+----------+
-```
+
 ### Listar todos los vehículos con año 2019.
 ```sql
 select * from Vehiculos where anio=2019;
 ```
-```sql
-+----+------------+--------+------+----------------+
 | id |   marca    | modelo | anio | id_propietario |
-+----+------------+--------+------+----------------+
+|----|------------|--------|------|----------------|
 | 1  | Ford       | Fiesta | 2019 | 1              |
 | 7  | Toyota     | RAV4   | 2019 | 7              |
 | 11 | Chevrolet  | Malibu | 2019 | 11             |
 | 16 | Volkswagen | Jetta  | 2019 | 16             |
 | 20 | Nissan     | Murano | 2019 | 20             |
-+----+------------+--------+------+----------------+
-```
+
 ### Seleccionar propietarios que tienen vehículos de la marca "Toyota".
 ```sql
 select * from Propietarios as prop, Vehiculos as veh where veh.id_propietario = prop.id and veh.marca='Toyota';
 ```
-```sql
-+----+--------+----------+-----------+----+--------+------------+------+----------------+
 | id | nombre | apellido |    dni    | id | marca  |   modelo   | anio | id_propietario |
-+----+--------+----------+-----------+----+--------+------------+------+----------------+
++----|--------|----------|-----------|----|--------|------------|------|----------------|
 | 2  | Maria  | Lopez    | 87654321B | 2  | Toyota | Corolla    | 2018 | 2              |
 | 7  | Diego  | Sanchez  | 55555555G | 7  | Toyota | RAV4       | 2019 | 7              |
 | 12 | Marta  | Diaz     | 10101010L | 12 | Toyota | Camry      | 2020 | 12             |
 | 18 | Clara  | Soto     | 16161616R | 18 | Toyota | Highlander | 2020 | 18             |
-+----+--------+----------+-----------+----+--------+------------+------+----------------+
-```
+
 ### Listar vehículos con marca "Ford" y modelo "Fiesta".
 ```sql
 select * from Vehiculos where marca='Ford' and modelo='Fiesta';
 ```
-```sql
-+----+-------+--------+------+----------------+
 | id | marca | modelo | anio | id_propietario |
 +----+-------+--------+------+----------------+
 | 1  | Ford  | Fiesta | 2019 | 1              |
-+----+-------+--------+------+----------------+
-```
+
 ### Seleccionar propietarios con DNI "12345678A".
 ```sql
 select * from Propietarios where dni='12345678A';
 ```
-```sql
-+----+--------+----------+-----------+
 | id | nombre | apellido |    dni    |
 +----+--------+----------+-----------+
 | 1  | Juan   | Perez    | 12345678A |
-+----+--------+----------+-----------+
-```
+
 ### Listar vehículos que pertenecen al propietario con ID 5.
 ```sql
 select * from Vehiculos where id=5;
 ```
-```sql
-+----+-------+--------+------+----------------+
 | id | marca | modelo | anio | id_propietario |
 +----+-------+--------+------+----------------+
 | 5  | Honda | Civic  | 2016 | 5              |
-+----+-------+--------+------+----------------+
-```
 
 ## Updates 
 ### Actualizar el nombre de un propietario con DNI "12345678A".
 ```sql
 update Propietarios set nombre='Juana' where dni='12345678A';
 ```
-```sql
-+----+----------+-----------+-----------+
 | id |  nombre  | apellido  |    dni    |
 +----+----------+-----------+-----------+
 | 1  | Juana    | Perez     | 12345678A |
@@ -287,14 +253,11 @@ update Propietarios set nombre='Juana' where dni='12345678A';
 | 18 | Clara    | Soto      | 16161616R |
 | 19 | Sergio   | Mendoza   | 17171717S |
 | 20 | Patricia | Navarro   | 18181818T |
-+----+----------+-----------+-----------+
-```
+
 ### Modificar el año de un vehículo con ID 3 a 2022.
 ```sql
 update Vehiculos set anio=2022 where id=3;
 ```
-```sql
-+----+------------+------------+------+----------------+
 | id |   marca    |   modelo   | anio | id_propietario |
 +----+------------+------------+------+----------------+
 | 1  | Ford       | Fiesta     | 2019 | 1              |
@@ -317,14 +280,11 @@ update Vehiculos set anio=2022 where id=3;
 | 18 | Toyota     | Highlander | 2020 | 18             |
 | 19 | Honda      | Odyssey    | 2016 | 19             |
 | 20 | Nissan     | Murano     | 2019 | 20             |
-+----+------------+------------+------+----------------+
-```
+
 ### Cambiar el modelo de todos los vehículos Nissan a "Micra".
 ```sql
 update Vehiculos set modelo='Micra' where marca='Nissan';
 ```
-```sql
-+----+------------+------------+------+----------------+
 | id |   marca    |   modelo   | anio | id_propietario |
 +----+------------+------------+------+----------------+
 | 1  | Ford       | Fiesta     | 2019 | 1              |
@@ -347,14 +307,11 @@ update Vehiculos set modelo='Micra' where marca='Nissan';
 | 18 | Toyota     | Highlander | 2020 | 18             |
 | 19 | Honda      | Odyssey    | 2016 | 19             |
 | 20 | Nissan     | Micra      | 2019 | 20             |
-+----+------------+------------+------+----------------+
-```
+
 ### Actualizar el apellido de un propietario con ID 7 a "Gomez".
 ```sql
 update Propietarios set apellido='Gomez' where id=7;
 ```
-```sql
-+----+----------+-----------+-----------+
 | id |  nombre  | apellido  |    dni    |
 +----+----------+-----------+-----------+
 | 1  | Juana    | Perez     | 12345678A |
@@ -377,14 +334,11 @@ update Propietarios set apellido='Gomez' where id=7;
 | 18 | Clara    | Soto      | 16161616R |
 | 19 | Sergio   | Mendoza   | 17171717S |
 | 20 | Patricia | Navarro   | 18181818T |
-+----+----------+-----------+-----------+
-```
+
 ### Modificar la marca de un vehículo con modelo "Fiesta" a "Renault".
 ```sql
 update Vehiculos  set marca='Renault' where modelo='Fiesta';
 ```
-```sql
-+----+------------+------------+------+----------------+
 | id |   marca    |   modelo   | anio | id_propietario |
 +----+------------+------------+------+----------------+
 | 1  | Renault    | Fiesta     | 2019 | 1              |
@@ -407,5 +361,3 @@ update Vehiculos  set marca='Renault' where modelo='Fiesta';
 | 18 | Toyota     | Highlander | 2020 | 18             |
 | 19 | Honda      | Odyssey    | 2016 | 19             |
 | 20 | Nissan     | Micra      | 2019 | 20             |
-+----+------------+------------+------+----------------+
-```
