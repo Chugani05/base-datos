@@ -215,7 +215,7 @@ select p.id, p.nombre, v.fecha, v.cantidad from productos as p, ventas as v wher
 select nombre, precio from productos where precio<=2;
 ```
 |       nombre       | precio |
-+--------------------+--------+
+|--------------------|--------|
 | Leche              | 1.8    |
 | Pan                | 1.2    |
 | Huevos             | 1.0    |
@@ -242,7 +242,7 @@ select sum(cantidad) as cantidad_total, fecha from ventas group by fecha;
 select * from productos where (nombre like 'P%');
 ```
 | id |     nombre      | categoria | precio |
-+----+-----------------+-----------+--------+
+|----|-----------------|-----------|--------|
 | 3  | Pan             | Panadería | 1.2    |
 | 5  | Pollo           | Carnes    | 5.5    |
 | 11 | Papel Higiénico | Hogar     | 1.5    |
@@ -260,7 +260,7 @@ select p.nombre, max(cantidad) as cantidad_máxima from productos as p, ventas a
 select p.nombre from productos as p, ventas as v where p.id=v.id_producto and fecha='2024-01-18';
 ```
 | nombre  |
-+---------+
+|---------|
 | Huevos  |
 | Tomates |
 | Cereal  |
@@ -325,7 +325,7 @@ select nombre, categoria from productos order by categoria;
 select sum(precio) as precio_total from productos, ventas where productos.id=ventas.id_producto and fecha='2024-01-19';
 ```
 | precio_total |
-+--------------+
+|--------------|
 | 6.7          |
 
 ### Mostrar los productos que no pertenecen a la categoría "Higiene".

@@ -216,7 +216,7 @@ select sum(salario) as suma_salario from empleados;
 select round(salario, 2) as redondeo_salario from empleados;
 ```
 | redondeo_salario |
-+------------------+
+|------------------|
 | 50000.0          |
 | 60000.0          |
 | 55000.0          |
@@ -399,13 +399,11 @@ select nombre, salario from empleados order by salario desc limit 5;
 ```sql
 select nombre, salario from empleados where (nombre like 'M%' or nombre like 'N%') and salario > 50000;
 ```
-+---------+---------+
 | nombre  | salario |
-+---------+---------+
+|---------|---------|
 | María   | 60000.0 |
 | Miguel  | 51000.0 |
 | Natalia | 54000.0 |
-+---------+---------+
 
 ### Empleados en el departamento 'TI' o 'Ventas' ordenados alfabéticamente por nombre.
 ```sql
