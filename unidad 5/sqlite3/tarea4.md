@@ -263,43 +263,203 @@ select p.nombre from productos as p, ventas as v where p.id=v.id_producto and fe
 
 ### Calcular el total de ventas para cada producto.
 ```sql
+select p.nombre, v.cantidad from productos as p, ventas as v where p.id=v.id_producto;
 ```
+|    nombre     | cantidad |
+|---------------|----------|
+| Arroz         | 5        |
+| Leche         | 3        |
+| Manzanas      | 2        |
+| Pollo         | 1        |
+| Huevos        | 10       |
+| Tomates       | 4        |
+| Cereal        | 2        |
+| Galletas      | 7        |
+| Café          | 3        |
+| Jabón de Baño | 6        |
+
 ### Encontrar los productos con un precio entre 3 y 4.
 ```sql
+select nombre, precio from productos where precio between 3 and 4;
 ```
+|  nombre  | precio |
+|----------|--------|
+| Manzanas | 3.0    |
+| Queso    | 4.0    |
+| Cereal   | 3.5    |
+| Cerveza  | 3.8    |
+
 ### Listar los productos y sus categorías ordenados alfabéticamente por categoría.
 ```sql
+select nombre, categoria from productos order by categoria;
 ```
+|       nombre       | categoria |
+|--------------------|-----------|
+| Arroz              | Alimentos |
+| Café               | Bebidas   |
+| Botellas de Agua   | Bebidas   |
+| Cerveza            | Bebidas   |
+| Pollo              | Carnes    |
+| Aceite de Oliva    | Cocina    |
+| Sopa enlatada      | Conservas |
+| Cereal             | Desayuno  |
+| Manzanas           | Frutas    |
+| Cepillo de Dientes | Higiene   |
+| Jabón de Baño      | Higiene   |
+| Papel Higiénico    | Hogar     |
+| Detergente         | Limpieza  |
+| Leche              | Lácteos   |
+| Huevos             | Lácteos   |
+| Yogurt             | Lácteos   |
+| Queso              | Lácteos   |
+| Pan                | Panadería |
+| Galletas           | Snacks    |
+| Tomates            | Verduras  |
+
 ### Calcular el precio total de los productos vendidos en la fecha '2024-01-19'.
 ```sql
+select sum(precio) as precio_total from productos, ventas where productos.id=ventas.id_producto and fecha='2024-01-19';
 ```
+| precio_total |
++--------------+
+| 6.7          |
+
 ### Mostrar los productos que no pertenecen a la categoría "Higiene".
 ```sql
+select nombre, categoria from productos where not categoria='Higiene';
 ```
+|      nombre      | categoria |
+|------------------|-----------|
+| Arroz            | Alimentos |
+| Leche            | Lácteos   |
+| Pan              | Panadería |
+| Manzanas         | Frutas    |
+| Pollo            | Carnes    |
+| Huevos           | Lácteos   |
+| Yogurt           | Lácteos   |
+| Tomates          | Verduras  |
+| Queso            | Lácteos   |
+| Cereal           | Desayuno  |
+| Papel Higiénico  | Hogar     |
+| Detergente       | Limpieza  |
+| Galletas         | Snacks    |
+| Aceite de Oliva  | Cocina    |
+| Café             | Bebidas   |
+| Sopa enlatada    | Conservas |
+| Botellas de Agua | Bebidas   |
+| Cerveza          | Bebidas   |
+
 ### Encontrar la cantidad total de productos en cada categoría.
 ```sql
+select categoria, count(nombre) as cantidad_total from productos group by categoria;
 ```
+| categoria | cantidad_total |
+|-----------|----------------|
+| Alimentos | 1              |
+| Bebidas   | 3              |
+| Carnes    | 1              |
+| Cocina    | 1              |
+| Conservas | 1              |
+| Desayuno  | 1              |
+| Frutas    | 1              |
+| Higiene   | 2              |
+| Hogar     | 1              |
+| Limpieza  | 1              |
+| Lácteos   | 4              |
+| Panadería | 1              |
+| Snacks    | 1              |
+| Verduras  | 1              |
+
 ### Listar los productos que tienen un precio igual a la media de precios.
 ```sql
+select * from productos where precio = (select avg(precio) from productos);
 ```
+El precio medio de los productos era de 2.625, y teniendo en cuanta de que no hay ningun producto con ese precio no genera tabla.
+
 ### Calcular el precio total de los productos vendidos en cada fecha.
 ```sql
+select fecha, sum(precio) as precio_total from productos, ventas where productos.id=ventas.id_producto group by fecha;
 ```
+|   fecha    | precio_total |
+|------------|--------------|
+| 2024-01-17 | 12.8         |
+| 2024-01-18 | 6.7          |
+| 2024-01-19 | 6.7          |
+| 2024-01-20 | 1.2          |
+
 ### Mostrar los productos con un nombre que termina con la letra 'o'.
 ```sql
+select * from productos where (nombre like '%o');
 ```
+| id |     nombre      | categoria | precio |
+|----|-----------------|-----------|--------|
+| 5  | Pollo           | Carnes    | 5.5    |
+| 9  | Queso           | Lácteos   | 4.0    |
+| 11 | Papel Higiénico | Hogar     | 1.5    |
+| 18 | Jabón de Baño   | Higiene   | 1.2    |
+
 ### Encontrar los productos que han sido vendidos en más de una fecha.
 ```sql
 ```
 ### Listar los productos cuya categoría comienza con la letra 'L'.
 ```sql
+select * from productos where (categoria like 'L%');
 ```
+| id |   nombre   | categoria | precio |
+|----|------------|-----------|--------|
+| 2  | Leche      | Lácteos   | 1.8    |
+| 6  | Huevos     | Lácteos   | 1.0    |
+| 7  | Yogurt     | Lácteos   | 2.0    |
+| 9  | Queso      | Lácteos   | 4.0    |
+| 13 | Detergente | Limpieza  | 2.8    |
+
 ### Calcular el total de ventas para cada producto en la fecha '2024-01-17'.
 ```sql
+select p.nombre, v.cantidad from productos as p, ventas as v where p.id=v.id_producto and fecha='2024-01-17';
 ```
+|  nombre  | cantidad |
+|----------|----------|
+| Arroz    | 5        |
+| Leche    | 3        |
+| Manzanas | 2        |
+| Pollo    | 1        |
+
 ### Mostrar los productos cuyo nombre tiene al menos 5 caracteres.
 ```sql
+select * from productos where length(nombre) >= 5;
 ```
-### Encontrar los productos que tienen un precio superior al precio máximo en la tabla "productos".
+| id |       nombre       | categoria | precio |
+|----|--------------------|-----------|--------|
+| 1  | Arroz              | Alimentos | 2.5    |
+| 2  | Leche              | Lácteos   | 1.8    |
+| 4  | Manzanas           | Frutas    | 3.0    |
+| 5  | Pollo              | Carnes    | 5.5    |
+| 6  | Huevos             | Lácteos   | 1.0    |
+| 7  | Yogurt             | Lácteos   | 2.0    |
+| 8  | Tomates            | Verduras  | 2.2    |
+| 9  | Queso              | Lácteos   | 4.0    |
+| 10 | Cereal             | Desayuno  | 3.5    |
+| 11 | Papel Higiénico    | Hogar     | 1.5    |
+| 12 | Cepillo de Dientes | Higiene   | 2.0    |
+| 13 | Detergente         | Limpieza  | 2.8    |
+| 14 | Galletas           | Snacks    | 1.7    |
+| 15 | Aceite de Oliva    | Cocina    | 4.5    |
+| 17 | Sopa enlatada      | Conservas | 2.3    |
+| 18 | Jabón de Baño      | Higiene   | 1.2    |
+| 19 | Botellas de Agua   | Bebidas   | 1.0    |
+| 20 | Cerveza            | Bebidas   | 3.8    |
+
+### Encontrar los productos que tienen un precio superior al precio medio en la tabla "productos".
 ```sql
+select * from productos where precio > (select avg(precio) from productos);
 ```
+| id |     nombre      | categoria | precio |
+|----|-----------------|-----------|--------|
+| 4  | Manzanas        | Frutas    | 3.0    |
+| 5  | Pollo           | Carnes    | 5.5    |
+| 9  | Queso           | Lácteos   | 4.0    |
+| 10 | Cereal          | Desayuno  | 3.5    |
+| 13 | Detergente      | Limpieza  | 2.8    |
+| 15 | Aceite de Oliva | Cocina    | 4.5    |
+| 16 | Café            | Bebidas   | 5.0    |
+| 20 | Cerveza         | Bebidas   | 3.8    |
