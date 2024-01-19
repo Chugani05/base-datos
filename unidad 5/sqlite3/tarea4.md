@@ -65,10 +65,14 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 ```
 ## Respondiendo preguntas
 ### Realiza el diagrama ER de la BBDD supermercado.
-### Realiza el diagrama MR de la BBDD supermercado.
-### Indica si la BBDD esta normalizada hasta la 3ª forma normal, justificando la respuesta
-## Realización de consultas
+[*Entidad-Relacion*](https://github.com/Chugani05/base-datos/blob/main/unidad%205/sqlite3/EntidadRelaci%C3%B3n.png)
 
+### Realiza el diagrama MR de la BBDD supermercado.
+[*Modelo Relacional*](https://github.com/Chugani05/base-datos/blob/main/unidad%205/sqlite3/ModeloRelacional.png)
+
+### Indica si la BBDD esta normalizada hasta la 3ª forma normal, justificando la respuesta
+
+## Realización de consultas
 ### Mostrar todos los productos de la categoría "Bebidas".
 ```sql
 select * from productos where categoria='Bebidas';
