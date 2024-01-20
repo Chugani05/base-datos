@@ -58,7 +58,6 @@ Mediante el siguiente comando entramos en sqlite:
 ```sql
 sqlite3 tarea4.db 
 ```
-
 Por medio del comando dado a continuación realizamos la creacion de la tabla y la inserción de la informacion en la base de datos
 ```sql
 .read supermercado-dump.sql.
@@ -70,7 +69,14 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 ### Realiza el diagrama MR de la BBDD supermercado.
 [*Modelo Relacional*](https://github.com/Chugani05/base-datos/blob/main/unidad%205/sqlite3/ModeloRelacional.png)
 
-### Indica si la BBDD esta normalizada hasta la 3ª forma normal, justificando la respuesta
+### Indica si la BBDD esta normalizada hasta la 3ª forma normal, justificando la respuesta.
+Las tablas proporcionadas cumplen con los requisitos de la Primera Forma Normal (1FN), ya que los valores en cada celda son atómicos e indivisibles, y existe una clave primaria única para identificar cada fila.
+
+Asimismo, cumplen con la Segunda Forma Normal (2FN), ya que no presentan dependencias parciales en sus claves primarias. Cada atributo no clave depende completamente de la clave primaria correspondiente.
+
+Además, cumplen con la Tercera Forma Normal (3FN), ya que no muestran dependencias transitivas. Cada atributo no clave depende directamente de la clave primaria sin la intervención de otros atributos.
+
+En resumen, las tablas están estructuradas de manera normalizada hasta la Tercera Forma Normal, lo que garantiza un diseño eficiente y sin redundancias.
 
 ## Realización de consultas
 ### Mostrar todos los productos de la categoría "Bebidas".
@@ -322,11 +328,11 @@ select nombre, categoria from productos order by categoria;
 
 ### Calcular el precio total de los productos vendidos en la fecha '2024-01-19'.
 ```sql
-select sum(precio) as precio_total from productos, ventas where productos.id=ventas.id_producto and fecha='2024-01-19';
+select sum(p.precio * v.cantidad) as ingresos from productos as p, ventas as v where p.id=v.id_producto and v.fecha='2024-01-19';
 ```
-| precio_total |
-|--------------|
-| 6.7          |
+| ingresos |
+|----------|
+| 26.9     |
 
 ### Mostrar los productos que no pertenecen a la categoría "Higiene".
 ```sql
@@ -404,7 +410,10 @@ select * from productos where (nombre like '%o');
 
 ### Encontrar los productos que han sido vendidos en más de una fecha.
 ```sql
+select id_producto, count(distinct fecha) as fecha_venta from ventas group by id_producto having fecha_venta > 1;;
 ```
+Al no haberse vendido ningún producto en más de una fecha no se genera tabla.
+
 ### Listar los productos cuya categoría comienza con la letra 'L'.
 ```sql
 select * from productos where (categoria like 'L%');
