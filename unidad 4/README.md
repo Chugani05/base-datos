@@ -1,3 +1,4 @@
+# Normalización
 La normalización, en términos generales, se refiere al proceso de organizar datos en una base de datos de manera eficiente para reducir la redundancia y mejorar la integridad de los datos. Se utiliza comúnmente en el diseño de bases de datos relacionales. Aquí hay una explicación breve y resumida de los conceptos clave:
 
     Eliminación de redundancias: La normalización busca minimizar la redundancia en una base de datos al organizar la información de manera eficiente. Se logra dividiendo las tablas grandes en tablas más pequeñas y relacionadas.
@@ -21,20 +22,16 @@ La normalización, en términos generales, se refiere al proceso de organizar da
 En 1FN, cada celda de la tabla debe contener un solo valor y no puede haber conjuntos de valores repetidos.
 
 **Ejemplo no en 1FN:**
-```
 Tabla: Empleados
 | ID | Nombre    | Teléfonos                   |
 |----|-----------|-----------------------------|
 | 1  | Juan      | 123-456-7890, 555-123-4567  |
 | 2  | María     | 987-654-3210                |
 | 3  | Carlos    | 555-123-4567, 987-654-3210  |
-```
 
 En este ejemplo, la columna "Teléfonos" viola la 1FN porque contiene múltiples valores en una sola celda. 
 
 **Corregido (en 1FN):**
-```
-Tabla: Empleados
 Tabla: Empleados
 | ID | Nombre | Teléfono       |
 |----|--------|----------------|
@@ -43,25 +40,21 @@ Tabla: Empleados
 | 2  | María  | 987-654-3210   |
 | 3  | Carlos | 555-123-4567   |
 | 3  | Carlos | 987-654-3210   |
-```
 
 ### Segunda Forma Normal (2FN):
 En 2FN, la tabla debe estar en 1FN y todos los atributos no clave deben depender completamente de la clave primaria.
 
 **Ejemplo no en 2FN:**
-```
 Tabla: Ventas
 | ID Venta | Producto    | Precio | Categoría    |
 |----------|-------------|--------|--------------|
 | 1        | Laptop      | 1000   | Electrónica  |
 | 2        | Teléfono    | 500    | Electrónica  |
 | 3        | Camiseta    | 20     | Ropa         |
-```
 
 En este ejemplo, "Categoría" depende solo parcialmente de la clave primaria (ID Venta, Producto), ya que la categoría está relacionada solo con el producto, no con toda la clave primaria.
 
 **Corregido (en 2FN):**
-```
 Tabla: Productos
 | Producto   | Categoría    |
 |------------|--------------|
@@ -75,25 +68,21 @@ Tabla: Ventas
 | 1        | Laptop      | 1000   |
 | 2        | Teléfono    | 500    |
 | 3        | Camiseta    | 20     |
-```
 
 ### Tercera Forma Normal (3FN):
 En 3FN, la tabla debe estar en 2FN y no debe haber dependencias transitivas.
 
 **Ejemplo no en 3FN:**
-```
 Tabla: Empleados
 | ID | Departamento | Jefe ID | Jefe Nombre |
 |----|--------------|---------|-------------|
 | 1  | IT           | 3       | Carlos      |
 | 2  | Ventas       | 1       | Juan        |
 | 3  | Finanzas     | NULL    | NULL        |
-```
 
 En este ejemplo, "Jefe Nombre" depende tanto de "Jefe ID" como de "ID". Esto crea una dependencia transitiva.
 
 **Corregido (en 3FN):**
-```
 Tabla: Empleados
 | ID | Departamento | Jefe ID |
 |----|--------------|---------|
@@ -106,6 +95,5 @@ Tabla: Jefes
 |---------|-------------|
 | 1       | Juan        |
 | 3       | Carlos      |
-```
 
 En este ejemplo, se separa la información del jefe en una tabla aparte para eliminar la dependencia transitiva.
