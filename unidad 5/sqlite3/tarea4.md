@@ -410,7 +410,9 @@ select * from productos where (nombre like '%o');
 
 ### Encontrar los productos que han sido vendidos en más de una fecha.
 ```sql
-select id_producto, count(distinct fecha) as fecha_venta from ventas group by id_producto having fecha_venta > 1;;
+select id_producto, count(distinct fecha) as fecha_venta from ventas group by id_producto having fecha_venta > 1;
+# select id_producto from ventas as v where count(distinct (v.fecha) > 1) as fecha_venta;
+# select p.id, p.nombre from productos as p, ventas as v where p.id=v.id_producto group by p.id, p.nombre having count(distinct (v.fecha)) > 1;
 ```
 Al no haberse vendido ningún producto en más de una fecha no se genera tabla.
 
