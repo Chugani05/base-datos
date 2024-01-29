@@ -8,6 +8,7 @@ apellido integer not null,
 nota entero not null,
 id_clase entero not null
 );
+
 -- Insercion de elementos
 INSERT INTO clase (id, max_alumnos) 
 VALUES (1, 30), (2, 25), (3, 20);
