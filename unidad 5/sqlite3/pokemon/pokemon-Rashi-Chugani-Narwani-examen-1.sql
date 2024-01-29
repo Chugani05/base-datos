@@ -310,7 +310,6 @@ select t.nombre, p.nivel from Tipo as t, Pokemon as p where t.id=p.id_tipo and p
 +-----------+-------+
 |  nombre   | nivel |
 +-----------+-------+
-| Exeggutor | 40    |
 | Venusaur  | 45    |
 | Venusaur  | 70    |
 +-----------+-------+
