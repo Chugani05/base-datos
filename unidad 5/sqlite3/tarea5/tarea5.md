@@ -71,65 +71,139 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 
 ## Realización de consultas
 -- Selección de libros cuyo título comienza con "H".
+```sql
+select * from libro where titulo regexp 'H';
+```
+┌────────┬───────────────────────────────────┬──────────┬──────────────────────┬────────┐
+│ codigo │              titulo               │ autor_id │      editorial       │ precio │
+├────────┼───────────────────────────────────┼──────────┼──────────────────────┼────────┤
+│ 4      │ One Hundred Years of Solitude     │ 9        │ Harper & Row         │ 22.5   │
+│ 6      │ The Hobbit                        │ 10       │ George Allen & Unwin │ 24.99  │
+│ 14     │ Wuthering Heights                 │ 16       │ Emily Brontë         │ 12.99  │
+│ 18     │ The Adventures of Sherlock Holmes │ 20       │ George Newnes        │ 16.99  │
+└────────┴───────────────────────────────────┴──────────┴──────────────────────┴────────┘
+
 
 -- Libros escritos por autores cuyos nombres terminan con "ing".
+```sql
+```
 
 -- Libros con títulos que contienen la palabra "and" en cualquier posición.
+```sql
+```
 
 -- Libros cuyo título comienza con una vocal.
+```sql
+```
 
 -- Libros cuyo autor tiene al menos una vocal repetida.
+```sql
+```
 
 -- Libros con precios que tienen dos dígitos decimales exactos.
+```sql
+```
 
 -- Libros cuyos títulos tienen al menos tres palabras.
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre empieza con la letra "A":
+```sql
+```
 
 -- Seleccionar los libros cuyo título contiene la palabra "SQL":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre termina con "ez":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre tiene al menos 5 caracteres:
+```sql
+```
 
 -- Seleccionar los libros cuya editorial es diferente de "EditorialX":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre contiene al menos una vocal:
+```sql
+```
 
 -- Seleccionar los libros cuyo título comienza con una letra mayúscula:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre no contiene la letra "r":
+```sql
+```
 
 -- Seleccionar los libros cuya editorial empieza con la letra "P":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre tiene exactamente 6 caracteres:
+```sql
+```
 
 -- Seleccionar los libros cuyo título contiene al menos un número:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre inicia con una vocal:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre no contiene espacios en blanco:
+```sql
+```
 
 -- Seleccionar los libros cuyo título termina con una vocal:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre contiene la secuencia "er":
+```sql
+```
 
 -- Seleccionar los libros cuyo título empieza con la palabra "The":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre tiene al menos una letra mayúscula:
+```sql
+```
 
 -- Seleccionar los libros cuyo precio es un número decimal con exactamente dos decimales:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre no contiene números:
+```sql
+```
 
 -- Seleccionar los libros cuyo título contiene al menos tres vocales:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre inicia con una consonante:
+```sql
+```
 
 -- Seleccionar los libros cuyo título no contiene la palabra "Science":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre tiene al menos una letra repetida consecutivamente:
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre empieza con "M" o termina con "n":
+```sql
+```
 
 -- Obtener todos los autores cuyo nombre no contiene caracteres especiales:
+```sql
+```
