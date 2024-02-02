@@ -1,3 +1,4 @@
+# Tarea 5
 ## Creación de fichero base-datos-libros.sql.
 Creamos un fichero nano en el que insertamos la información proporcionada debajo con el siguente comando:
 ```sql
@@ -70,19 +71,19 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 ```
 
 ## Realización de consultas
--- Selección de libros cuyo título comienza con "H".
+### Selección de libros cuyo título comienza con "H".
 ```sql
 select * from libro where titulo regexp '^H';
 ```
 -- La consulta se devuelve vacía
 
--- Libros escritos por autores cuyos nombres terminan con "ing".
+### Libros escritos por autores cuyos nombres terminan con "ing".
 ```sql
 select titulo from libro as l, autor as a where a.id=l.autor_id and nombre regexp 'ing$';
 ```
 -- La consulta se devuelve vacía
 
--- Libros con títulos que contienen la palabra "and" en cualquier posición.
+### Libros con títulos que contienen la palabra "and" en cualquier posición.
 ```sql
 select titulo from libro where titulo regexp 'and';
 ```
@@ -93,118 +94,118 @@ select titulo from libro where titulo regexp 'and';
 | War and Peace                    |
 | Crime and Punishment             |
 
--- Libros cuyo título comienza con una vocal.
+### Libros cuyo título comienza con una vocal.
 ```sql
 ```
 
--- Libros cuyo autor tiene al menos una vocal repetida.
+### Libros cuyo autor tiene al menos una vocal repetida.
 ```sql
 ```
 
--- Libros con precios que tienen dos dígitos decimales exactos.
+### Libros con precios que tienen dos dígitos decimales exactos.
 ```sql
 ```
 
--- Libros cuyos títulos tienen al menos tres palabras.
+### Libros cuyos títulos tienen al menos tres palabras.
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre empieza con la letra "A":
+### Obtener todos los autores cuyo nombre empieza con la letra "A":
 ```sql
 ```
 
--- Seleccionar los libros cuyo título contiene la palabra "SQL":
+### Seleccionar los libros cuyo título contiene la palabra "SQL":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre termina con "ez":
+### Obtener todos los autores cuyo nombre termina con "ez":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre tiene al menos 5 caracteres:
+### Obtener todos los autores cuyo nombre tiene al menos 5 caracteres:
 ```sql
 ```
 
--- Seleccionar los libros cuya editorial es diferente de "EditorialX":
+### Seleccionar los libros cuya editorial es diferente de "EditorialX":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre contiene al menos una vocal:
+### Obtener todos los autores cuyo nombre contiene al menos una vocal:
 ```sql
 ```
 
--- Seleccionar los libros cuyo título comienza con una letra mayúscula:
+### Seleccionar los libros cuyo título comienza con una letra mayúscula:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre no contiene la letra "r":
+### Obtener todos los autores cuyo nombre no contiene la letra "r":
 ```sql
 ```
 
--- Seleccionar los libros cuya editorial empieza con la letra "P":
+### Seleccionar los libros cuya editorial empieza con la letra "P":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre tiene exactamente 6 caracteres:
+### Obtener todos los autores cuyo nombre tiene exactamente 6 caracteres:
 ```sql
 ```
 
--- Seleccionar los libros cuyo título contiene al menos un número:
+### Seleccionar los libros cuyo título contiene al menos un número:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre inicia con una vocal:
+### Obtener todos los autores cuyo nombre inicia con una vocal:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre no contiene espacios en blanco:
+### Obtener todos los autores cuyo nombre no contiene espacios en blanco:
 ```sql
 ```
 
--- Seleccionar los libros cuyo título termina con una vocal:
+### Seleccionar los libros cuyo título termina con una vocal:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre contiene la secuencia "er":
+### Obtener todos los autores cuyo nombre contiene la secuencia "er":
 ```sql
 ```
 
--- Seleccionar los libros cuyo título empieza con la palabra "The":
+### Seleccionar los libros cuyo título empieza con la palabra "The":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre tiene al menos una letra mayúscula:
+### Obtener todos los autores cuyo nombre tiene al menos una letra mayúscula:
 ```sql
 ```
 
--- Seleccionar los libros cuyo precio es un número decimal con exactamente dos decimales:
+### Seleccionar los libros cuyo precio es un número decimal con exactamente dos decimales:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre no contiene números:
+### Obtener todos los autores cuyo nombre no contiene números:
 ```sql
 ```
 
--- Seleccionar los libros cuyo título contiene al menos tres vocales:
+### Seleccionar los libros cuyo título contiene al menos tres vocales:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre inicia con una consonante:
+### Obtener todos los autores cuyo nombre inicia con una consonante:
 ```sql
 ```
 
--- Seleccionar los libros cuyo título no contiene la palabra "Science":
+### Seleccionar los libros cuyo título no contiene la palabra "Science":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre tiene al menos una letra repetida consecutivamente:
+### Obtener todos los autores cuyo nombre tiene al menos una letra repetida consecutivamente:
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre empieza con "M" o termina con "n":
+### Obtener todos los autores cuyo nombre empieza con "M" o termina con "n":
 ```sql
 ```
 
--- Obtener todos los autores cuyo nombre no contiene caracteres especiales:
+### Obtener todos los autores cuyo nombre no contiene caracteres especiales:
 ```sql
 ```
