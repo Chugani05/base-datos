@@ -1,7 +1,7 @@
-## Creación de fichero base-datos-libros.sql.
+## Creación de fichero base-datos-clientes.sql.
 Creamos un fichero nano en el que insertamos la información proporcionada debajo con el siguente comando:
 ```sql
-nano base-datos-libros.sql
+nano base-datos-clientes.sql
 ```
 ```sql
 -- Crear la tabla de Clientes
@@ -125,11 +125,11 @@ INSERT INTO Pedidos (id_cliente, id_producto, cantidad, fecha_pedido) VALUES
 ## Lectura del fichero sql.
 Mediante el siguiente comando entramos en sqlite:
 ```sql
-sqlite3 tarea5.db 
+sqlite3 tarea6.db 
 ```
 Por medio del comando dado a continuación realizamos la creacion de la tabla y la inserción de la informacion en la base de datos
 ```sql
-.read base-datos-libros.sql
+.read base-datos-clientes.sql
 ```
 
 ## Realización de consultas
