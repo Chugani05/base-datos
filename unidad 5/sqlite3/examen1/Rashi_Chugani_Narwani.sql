@@ -101,6 +101,7 @@ select * from alumno where apellido='Martínez';
 -- 5. Obtener todos los datos de los alumnos que se apellidan Martínez y los que se apellidan Pérez.
 -- Consulta:
 select * from alumno where apellido='Martínez' or apellido='Pérez';
+select * from alumno where apellido in (Martínez, Pérez); -- otra solución (más eficiente) 
 /** Estado posterior
 ┌────────────┬────────┬──────────┬──────┬──────────┐
 │    dni     │ nombre │ apellido │ nota │ id_clase │
@@ -126,6 +127,7 @@ La consulta se devuelve vacía
 -- 7. Obtener todos los datos de los alumnos que asisten a la clase 8 y para el clase 5.
 -- Consulta:
 select * from alumno where id_clase=8 or id_clase=5;
+select * from alumno where id_clase in (8, 5); -- otra solución (más eficiente)
 /** Estado posterior
 La consulta se devuelve vacía
 **/
@@ -147,7 +149,8 @@ select * from alumno where (apellido like 'P%');
 
 -- 9. Obtener el número máximo de alumnos por en todas las clases.
 -- Consulta:
-select * from clase;
+select * from clase; --mal (mi forma)
+select max(max_alumnos) from clase;
 /** Estado posterior
 ┌────┬─────────────┐
 │ id │ max_alumnos │
@@ -162,6 +165,7 @@ select * from clase;
 -- 10. Obtener el número de alumnos en cada clase.
 -- Consulta:
 select c.id as clase, count(a.id_clase) as número_alumnos from alumno as a, clase as c where c.id=a.id_clase group by c.id;
+select id_clase, count(*) as cantidad_alumnos from alumno group by id_clase; -- esta es la forma que nos da éĺ
 /** Estado posterior
 ┌───────┬────────────────┐
 │ clase │ número_alumnos │
@@ -176,6 +180,7 @@ select c.id as clase, count(a.id_clase) as número_alumnos from alumno as a, cla
 -- 11. Obtener un listado completo de alumnos, incluyendo los datos de su clase a la que asisten.
 -- Consulta:
 select nombre, apellido, id_clase from alumno;
+select alumno.*, clase.max_alumnos from alumno as a, clase as c where c.id=a.id_clase; -- esta es la forma que nos da éĺ
 /** Estado posterior
 ┌────────┬───────────┬──────────┐
 │ nombre │ apellido  │ id_clase │
@@ -203,7 +208,8 @@ select nombre, apellido, id_clase from alumno;
 
 **/
 -- Consulta:
-select * from alumno order by nombre desc and order by nota asc;
+select * from alumno order by nombre desc and order by nota asc; -- mal (mia)
+select * from alumno order by nombre desc, nota asc; -- forma correcta
 /** Estado posterior
 
 
@@ -212,7 +218,8 @@ select * from alumno order by nombre desc and order by nota asc;
 
 -- 13. Obtener los nombres y apellido de los alumnos que asisten a la clase 4 y cuyo máximo de alumnos es mayor 10.
 -- Consulta:
-select a.nombre, a.apellido from alumno as a, clase as c where c.id=a.id_clase and id_clase=4 and max_alumnos=10;
+select a.nombre, a.apellido from alumno as a, clase as c where c.id=a.id_clase and id_clase=4 and max_alumnos=10; -- tiene errores (mia)
+select a.nombre, a.apellido from alumno as a, clase as c where c.id=a.id_clase and a.id_clase=4 and c.max_alumnos>10; -- manera correcta
 /** Estado posterior
 La consulta se devuelve vacía
 **/
@@ -222,7 +229,8 @@ La consulta se devuelve vacía
 /** Estado anterior
 **/
 -- Consulta:
-select c.id, c.max_alumnos from alumno as a, clase as c where c.id=a.id_clase and max_alumnos > (select avg(id_clase) from alumno);
+select c.id, c.max_alumnos from alumno as a, clase as c where c.id=a.id_clase and max_alumnos > (select avg(id_clase) from alumno); -- mal, mal, MAL
+(select avg(max_alumnos) from clase); -- esto es lo que habia que hacer
 /** Estado posterior
 ┌────┬─────────────┐
 │ id │ max_alumnos │
