@@ -107,7 +107,6 @@ select current_date as fecha_actual from empleados limit 1;
 |--------------|
 | 2024-01-17   |
 
-
 ### Calcula el promedio de salarios de todos los empleados.
 ```sql
 select avg(salario) as promidio_salario from empleados;
