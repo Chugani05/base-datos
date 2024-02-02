@@ -1,3 +1,4 @@
+# Tarea 6
 ## Creación de fichero base-datos-clientes.sql.
 Creamos un fichero nano en el que insertamos la información proporcionada debajo con el siguente comando:
 ```sql
