@@ -70,7 +70,6 @@ select upper(nombre) as nombre_mayusculas from empleados;
 | NATALIA           |
 | ROBERTO           |
 | BEATRIZ           |
-+-------------------+
 
 ### Calcula el valor absoluto del salario de todos los empleados.
 ```sql
