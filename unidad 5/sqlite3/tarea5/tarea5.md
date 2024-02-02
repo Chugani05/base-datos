@@ -72,25 +72,26 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 ## Realización de consultas
 -- Selección de libros cuyo título comienza con "H".
 ```sql
-select * from libro where titulo regexp 'H';
+select * from libro where titulo regexp '^H';
 ```
-┌────────┬───────────────────────────────────┬──────────┬──────────────────────┬────────┐
-│ codigo │              titulo               │ autor_id │      editorial       │ precio │
-├────────┼───────────────────────────────────┼──────────┼──────────────────────┼────────┤
-│ 4      │ One Hundred Years of Solitude     │ 9        │ Harper & Row         │ 22.5   │
-│ 6      │ The Hobbit                        │ 10       │ George Allen & Unwin │ 24.99  │
-│ 14     │ Wuthering Heights                 │ 16       │ Emily Brontë         │ 12.99  │
-│ 18     │ The Adventures of Sherlock Holmes │ 20       │ George Newnes        │ 16.99  │
-└────────┴───────────────────────────────────┴──────────┴──────────────────────┴────────┘
-
+-- La consulta se devuelve vacía
 
 -- Libros escritos por autores cuyos nombres terminan con "ing".
 ```sql
+select titulo from libro as l, autor as a where a.id=l.autor_id and nombre regexp 'ing$';
 ```
+-- La consulta se devuelve vacía
 
 -- Libros con títulos que contienen la palabra "and" en cualquier posición.
 ```sql
+select titulo from libro where titulo regexp 'and';
 ```
+|              titulo              |
+|----------------------------------|
+| The Old Man and the Sea          |
+| Alice's Adventures in Wonderland |
+| War and Peace                    |
+| Crime and Punishment             |
 
 -- Libros cuyo título comienza con una vocal.
 ```sql
