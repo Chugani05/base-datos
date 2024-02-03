@@ -1,3 +1,4 @@
+# Tarea 2
 ## Creación de tablas
 ```sql
 create table Propietarios (
