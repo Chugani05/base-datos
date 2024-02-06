@@ -1,44 +1,85 @@
 # SQLITE
-
-
-- `ALTER`: Añade o elimina objetos de la tabla
-
-```sql
-ALTER TABLE comments
-ADD COLUMN username TEXT;
-```
-
-```sql
-ALTER TABLE comments
-RENAME TO Coms;
-```
-
-- `DROP`: Elimina la tabla
-
-```sql
-DROP TABLE if exists Coments;
-```
-
-- `TRUNCATE`: Elimina TODOS los datos de la tabla
-
-
-## Para crear una base de datos:
-
+## Para crear una base de datos
 ```sql
 sqlite3 comment_section.db
 ```
 
-## Tipos de datos:
+## Importar archivo .sql
+```sql
+sqlite3 comment_section.db
+.read fihero.sql
+```
 
-- Text
+## Exportar la bbdd a un fichero .sql
+```sql
+.output fichero.sql
+.dump
+.exit 
+```
 
-- Integer (si es boleano 0(falso) o 1(true))
+## Tipos de datos
+| Tipo de dato  | Descripción  |
+|---|---|
+| Text  | Se usa para almacenar cadenas de caracteres.  |
+| Integer  | se usa para guardar valores numéricos enteros.  |
+| Real  | Se usa para almacenar valores numéricos con decimales. Se utiliza como separador el punto (.). Definimos campos de este tipo para precios, por ejemplo.  |
+| Blob  | Se usa para almacenar valores en formato binario (imágenes, archivos de sonido etc.)  |
 
-- Real  se usa para almacenar valores numéricos con decimales. Se utiliza como separador el punto (.). Definimos campos de este tipo para precios, por ejemplo.
+## Comandos meta
+| Comando  | Descripción  | Manera de uso  |
+|---|---|---|
+| .show | Muestra los valores actuales de varios parámetros | |
+| .databases | Proporciona nombres de bases de datos y archivos | |
+| .quit | Salir del programa sqlite3 | |
+| .tables | Mostrar tablas actuales | |
+| .schema | Pantalla de esquema de la tabla | |
+| .header | Mostrar u ocultar el encabezado de la tabla de salida | |
+| .dump | Base de datos de volcado en formato de texto SQL | |
+| .mode | Elecciona el modo de la tabla de salida | .mode table  |
+|  |  | .mode box  |
+|  |  | .mode markdown  |
 
-- Blob se usa para almacenar valores en formato binario (imágenes, archivos de sonido etc.)
+## Comandos estándar
+| Comando  | Descripción  | Manera de uso  |
+|---|---|---|
+| `ALTER`  | Añade o elimina objetos de la tabla  | ALTER TABLE comments ADD COLUMN username TEXT; |
+|  |  | ALTER TABLE comments RENAME to Coms;  |
+| `DROP`  | Elimina la tabla  | DROP TABLE if exists Coments;  |
+| `TRUNCATE`  | Elimina TODOS los datos de la tabla  |  |
+| `CREATE`  |  | CREATE TABLE usuario ( nombre text, clave text); |
+| `INSERT`  |  | INSERT INTO usuario (nombre, clave) VALUES ('Pedro Perez','pedrito'); |
+| `UPDATE`  | actualizar o modificar valores | UPDATE usuario SET nombre='Marceloduarte', clave='Marce' WHERE nombre='Marcelo'; |
+| `DELETE`  | Elimina información que cumpla con la condición que pongamos |  DELETE FROM usuario WHERE nombre='Marcelo'; |
+| `SELECT`  | muestra la info que le pidamos (\* para mostrar todo) | SELECT nombre, clave FROM usuario; |
+|  |  | SELECT * FROM usuario; |
 
-<br>
+## Comandos
+| Comando  | Descripción  | Manera de uso  |
+|---|---|---|
+| `WHERE`  | añadir una condición al select para especificar consulta | SELECT nombre, clave FROM usuario WHERE clave='predrito';  |
+| `AS`  | Se usa para dar seudónimo a las tablas  | SELECT * FROM ejemplo AS e, ejemplo2 AS e2;  |
+| `ORDER BY`  | Ordena el resultado de select, puede indicarse valor ascendente, descendente por valor calculado o expresiones | SELECT codigo, titulo, autor, editorial, precio FROM libro ORDER BY titulo ASC; |
+| | | SELECT codigo,titulo,autor,editorial,precio FROM libro ORDER BY editorial DESC;  |
+| | | SELECT titulo, autor, editorial, precio+(precio*0.1) AS preciocondescuento FROM libro ORDER BY preciocondescuento;  |
+
+## Operadores relacionales
+| Operador | Descripción |
+|---|---|
+| =	| igual |
+| <> | distinto | 
+| >	| mayor | 
+| <	| menor |
+| >= | mayor o igual |
+| <= | menor o igual |
+
+### Comentarios
+```sql
+/*comentario de más
+de una línea */
+
+--comentario de una línea
+```
+
 
 #### Se usa **NULL / NOT NULL** para indicar si valor es necesario que esté relleno o null si no hay info, por ej:
 
@@ -69,10 +110,7 @@ Se puede realizar búsqueda con ese parámetro:
  );
 ```
 
-- `as` se usa para dar seudónimo a las tablas:
-```sql
-SELECT * FROM ejemplo AS e, ejemplo2 AS e2;
-```
+
 
 - **FOREIGN KEY** si se trata de una tabla intermedia, se tiene que referencial el id de la tabla a la que hace referencia:
 
@@ -91,7 +129,7 @@ create table libro(
 );
 ```
 
-- OPERACIONES ARITMÉTICAS en las consultas
+## OPERACIONES ARITMÉTICAS en las consultas
 
 Para que nos devuelva el precio con un 10% de descuento:
 
@@ -126,114 +164,28 @@ create table libro(
  );
 ```
 
-## Crear tabla
-
+## Creación de tablas
 ```sql
 CREATE TABLE comments (
     post_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     email TEXT NOT NULL,
     website_url TEXT NULL,
-    comment TEXT NOT NULL );
+    comment TEXT NOT NULL
  );
 ```
 
+## Inserción de valores
 ```sql
-INSERT INTO comments (name, email, website_url, comment) VALUES ('Kai', 'kai97rg@gmail.com', 'ghustky.com', 'estoy cansado')
+INSERT INTO comments (name, email, website_url, comment) 
+VALUES ('Kai', 'kai97rg@gmail.com', 'ghustky.com', 'estoy cansado'),
+('Rashi', 'chugani205gmail.com', 'booklover.com', 'tengo sueño');
 ```
 
-Para ver las tabla creadas:
 
-```sql
-.table
-```
 
-Para poner modo tabla:
 
-```sql
-.mode table
-```
 
-### Comentarios
-
-```sql
-/*comentario de más
-de una línea */
-
-  --comentario de una línea
-```
-
-## COMANDOS
-
-- `DELETE` Elimina información que cumpla con la condición que pongamos
-
-```sql
-DELETE FROM comments
-WHERE post_id = 9;
-```
-
-```sql
- delete from usuario where nombre='Marcelo';
-```
-
-- `SELECT` muestra la info que le pidamos (\* para mostrar todo)
-
-```sql
-select * from comments;
-```
-
-```sql
-select nombre,clave from usuario;
-```
-
-- `WHERE` añadir una condición al select para especificar consulta
-
-```sql
-select nombre,clave
-  from usuario
-  where clave='test';
-```
-
-### Operadores
-
-| **Operador** | **Descripción** |
-| ------------ | --------------- |
-| =            | igual           |
-| <>           | distinto        |
-| >            | mayor           |
-| <            | menor           |
-| >=           | mayor o igual   |
-| <=           | menor o igual   |
-
-```sql
-select nombre,clave
-  from usuario
-  where clave<>'pedrito';
-```
-
-- `UPDATE` actualizar o modificar valores
-
-```sql
- update usuario set nombre='Marceloduarte', clave='Marce'
-  where nombre='Marcelo';
-```
-
-- `ORDER BY` ordena el resultado de select, puede indicarse valor ascendente o descendente
-
-```sql
-select codigo,titulo,autor,editorial,precio from libro order by titulo asc;
-```
-
-```sql
-select codigo,titulo,autor,editorial,precio from libro order by editorial desc;
-```
-
-También por valor calculado o expresión:
-
-```sql
-select titulo, autor, editorial, precio+(precio*0.1) as preciocondescuento
-  from libro
-  order by preciocondescuento;
 ```
 
 #### Operadores Lógicos (and, or, not, ())
@@ -442,6 +394,7 @@ Contar distintos autores por editorial:
 ```sql
 select id_producto from ventas as v where count(distinct(v.fecha)>1
 ```
+
 #### Consultas de select con otro select
 Seleccionar producto con precio igual a la media:
 
@@ -458,8 +411,7 @@ select p.nombre, v.precio from productos as p, ventas as v where p.id = v.id_pro
 ```
 
 
-## Funciones
-
+## Funciones básicas en SQL
 - `UPPER y LOWER` para mayúsculas o minúsculas
 ```sql
 SELECT UPPER(nombre) AS nombre_mayusculas, LOWER(nombre) AS nombre_minusculas FROM empleados;
@@ -513,15 +465,3 @@ CASE
 END;
 ```
 
-#### Exportar la bbdd a un fichero .sql.
-
-```sql
-sqlite> .output fichero.sql
-sqlite> .dump
-sqlite> .exit 
-```
-
-#### Importar archivo sql
-```sql
-.read fihero.sql
-```
