@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS reparacion (
     FOREIGN KEY (id_coche) REFERENCES coches(id_coche)
 );
 
-INSERT INTO clientes (nombre, edad, direccion) VALUES
-    ('Juan Pérez', 30, 'Calle A #123'),
+INSERT INTO clientes (nombre, edad, direccion) 
+VALUES ('Juan Pérez', 30, 'Calle A #123'),
     ('María Gómez', 25, 'Avenida B #456'),
     ('Carlos López', 35, 'Calle C #789'),
     ('Ana Martínez', 28, 'Avenida D #101'),
@@ -50,8 +50,9 @@ INSERT INTO clientes (nombre, edad, direccion) VALUES
     ('Francisco Ruiz', 33, 'Calle I #222'),
     ('Elena Torres', 29, 'Avenida J #333');
 
-INSERT INTO coches (modelo, marca, año, precio) VALUES
-    ('Sedán 2022', 'Toyota', 2022, 25000.00),
+
+INSERT INTO coches (modelo, marca, año, precio) 
+VALUES ('Sedán 2022', 'Toyota', 2022, 25000.00),
     ('Hatchback 2021', 'Honda', 2021, 22000.00),
     ('SUV 2023', 'Ford', 2023, 30000.00),
     ('Coupé 2022', 'Chevrolet', 2022, 28000.00),
@@ -62,8 +63,8 @@ INSERT INTO coches (modelo, marca, año, precio) VALUES
     ('Pickup 2022', 'Ram', 2022, 31000.00),
     ('Eléctrico 2021', 'Tesla', 2021, 40000.00);
 
-INSERT INTO ventas (id_cliente, id_coche, fecha_venta) VALUES
-    (1, 1, '2023-01-15'),
+INSERT INTO ventas (id_cliente, id_coche, fecha_venta)
+VALUES (1, 1, '2023-01-15'),
     (2, 2, '2023-02-20'),
     (3, 3, '2023-03-25'),
     (4, 4, '2023-04-10'),
@@ -72,10 +73,10 @@ INSERT INTO ventas (id_cliente, id_coche, fecha_venta) VALUES
     (7, 7, '2023-07-20'),
     (8, 8, '2023-08-25'),
     (10, 10, '2023-10-05');
-    
+
 -- Inserts para la tabla "reparación"
-INSERT INTO reparacion (id_cliente, id_coche, fecha_reparación, descripción) VALUES
-    (1, 1, '2023-05-15', 'Reparación de motor'),
+INSERT INTO reparacion (id_cliente, id_coche, fecha_reparación, descripción) 
+VALUES (1, 1, '2023-05-15', 'Reparación de motor'),
     (2, 3, '2023-06-20', 'Cambio de neumáticos'),
     (3, 5, '2023-07-25', 'Reparación de frenos'),
     (4, 2, '2023-08-10', 'Revisión general'),
