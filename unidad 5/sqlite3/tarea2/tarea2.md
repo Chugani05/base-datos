@@ -197,7 +197,7 @@ select * from Vehiculos where anio=2019;
 select * from Propietarios as prop, Vehiculos as veh where veh.id_propietario = prop.id and veh.marca='Toyota';
 ```
 | id | nombre | apellido |    dni    | id | marca  |   modelo   | anio | id_propietario |
-+----|--------|----------|-----------|----|--------|------------|------|----------------|
+|----|--------|----------|-----------|----|--------|------------|------|----------------|
 | 2  | Maria  | Lopez    | 87654321B | 2  | Toyota | Corolla    | 2018 | 2              |
 | 7  | Diego  | Sanchez  | 55555555G | 7  | Toyota | RAV4       | 2019 | 7              |
 | 12 | Marta  | Diaz     | 10101010L | 12 | Toyota | Camry      | 2020 | 12             |
@@ -208,7 +208,7 @@ select * from Propietarios as prop, Vehiculos as veh where veh.id_propietario = 
 select * from Vehiculos where marca='Ford' and modelo='Fiesta';
 ```
 | id | marca | modelo | anio | id_propietario |
-+----+-------+--------+------+----------------+
+|----|-------|--------|------|----------------|
 | 1  | Ford  | Fiesta | 2019 | 1              |
 
 ### Seleccionar propietarios con DNI "12345678A".
@@ -216,7 +216,7 @@ select * from Vehiculos where marca='Ford' and modelo='Fiesta';
 select * from Propietarios where dni='12345678A';
 ```
 | id | nombre | apellido |    dni    |
-+----+--------+----------+-----------+
+|----|--------|----------|-----------|
 | 1  | Juan   | Perez    | 12345678A |
 
 ### Listar vehículos que pertenecen al propietario con ID 5.
@@ -224,7 +224,7 @@ select * from Propietarios where dni='12345678A';
 select * from Vehiculos where id=5;
 ```
 | id | marca | modelo | anio | id_propietario |
-+----+-------+--------+------+----------------+
+|----|-------|--------|------|----------------|
 | 5  | Honda | Civic  | 2016 | 5              |
 
 ## Updates 
@@ -233,7 +233,7 @@ select * from Vehiculos where id=5;
 update Propietarios set nombre='Juana' where dni='12345678A';
 ```
 | id |  nombre  | apellido  |    dni    |
-+----+----------+-----------+-----------+
+|----|----------|-----------|-----------|
 | 1  | Juana    | Perez     | 12345678A |
 | 2  | Maria    | Lopez     | 87654321B |
 | 3  | Carlos   | Ruiz      | 11111111C |
@@ -260,7 +260,7 @@ update Propietarios set nombre='Juana' where dni='12345678A';
 update Vehiculos set anio=2022 where id=3;
 ```
 | id |   marca    |   modelo   | anio | id_propietario |
-+----+------------+------------+------+----------------+
+|----|------------|------------|------|----------------|
 | 1  | Ford       | Fiesta     | 2019 | 1              |
 | 2  | Toyota     | Corolla    | 2018 | 2              |
 | 3  | Nissan     | Sentra     | 2022 | 3              |
@@ -287,7 +287,7 @@ update Vehiculos set anio=2022 where id=3;
 update Vehiculos set modelo='Micra' where marca='Nissan';
 ```
 | id |   marca    |   modelo   | anio | id_propietario |
-+----+------------+------------+------+----------------+
+|----|------------|------------|------|----------------|
 | 1  | Ford       | Fiesta     | 2019 | 1              |
 | 2  | Toyota     | Corolla    | 2018 | 2              |
 | 3  | Nissan     | Micra      | 2022 | 3              |
@@ -314,7 +314,7 @@ update Vehiculos set modelo='Micra' where marca='Nissan';
 update Propietarios set apellido='Gomez' where id=7;
 ```
 | id |  nombre  | apellido  |    dni    |
-+----+----------+-----------+-----------+
+|----|----------|-----------|-----------|
 | 1  | Juana    | Perez     | 12345678A |
 | 2  | Maria    | Lopez     | 87654321B |
 | 3  | Carlos   | Ruiz      | 11111111C |
@@ -341,7 +341,7 @@ update Propietarios set apellido='Gomez' where id=7;
 update Vehiculos  set marca='Renault' where modelo='Fiesta';
 ```
 | id |   marca    |   modelo   | anio | id_propietario |
-+----+------------+------------+------+----------------+
+|----|------------|------------|------|----------------|
 | 1  | Renault    | Fiesta     | 2019 | 1              |
 | 2  | Toyota     | Corolla    | 2018 | 2              |
 | 3  | Nissan     | Micra      | 2022 | 3              |

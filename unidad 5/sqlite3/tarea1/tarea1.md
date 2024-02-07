@@ -70,10 +70,8 @@ values (1, 'Ejemplo1', 25, '10.5', '2022-05-15', '0'),
 ```sql
 select * from Ejemplo;
 ```
-```sql
-+----+-----------+--------+---------+------------+----------+
 | id |   texto   | entero | decimal |   fecha    | booleano |
-+----+-----------+--------+---------+------------+----------+
+|----|-----------|--------|---------|------------|----------|
 | 1  | Ejemplo1  | 25     | 10.5    | 2022-05-15 | 0        |
 | 2  | Ejemplo2  | 63     | 45.7    | 2022-06-22 | 1        |
 | 3  | Ejemplo3  | 12     | 30.0    | 2022-07-10 | 0        |
@@ -124,16 +122,13 @@ select * from Ejemplo;
 | 48 | Ejemplo48 | 96     | 25.6    | 2026-04-08 | 1        |
 | 49 | Ejemplo49 | 28     | 50.0    | 2026-05-25 | 0        |
 | 50 | Ejemplo50 | 75     | 85.3    | 2026-06-11 | 1        |
-+----+-----------+--------+---------+------------+----------+
-```
+
 ### Obtén las entradas con el campo entero mayor a 50.
 ```sql
 select entero from Ejemplo where entero>50;
 ```
-```sql
-+--------+
 | entero |
-+--------+
+|--------|
 | 63     |
 | 78     |
 | 55     |
@@ -160,18 +155,14 @@ select entero from Ejemplo where entero>50;
 | 63     |
 | 96     |
 | 75     |
-+--------+
-```
 
 ## Eliminaciones y Modificaciones
 ### Elimina las entradas donde el campo booleano es igual a True.
 ```sql
 delete from Ejemplo where booleano=1;
 ```
-```sql
-+----+-----------+--------+---------+------------+----------+
 | id |   texto   | entero | decimal |   fecha    | booleano |
-+----+-----------+--------+---------+------------+----------+
+|----|-----------|--------|---------|------------|----------|
 | 1  | Ejemplo1  | 25     | 10.5    | 2022-05-15 | 0        |
 | 3  | Ejemplo3  | 12     | 30.0    | 2022-07-10 | 0        |
 | 5  | Ejemplo5  | 42     | 18.9    | 2022-09-12 | 0        |
@@ -197,16 +188,13 @@ delete from Ejemplo where booleano=1;
 | 45 | Ejemplo45 | 50     | 15.9    | 2026-01-16 | 0        |
 | 47 | Ejemplo47 | 7      | 35.2    | 2026-03-22 | 0        |
 | 49 | Ejemplo49 | 28     | 50.0    | 2026-05-25 | 0        |
-+----+-----------+--------+---------+------------+----------+
-```
+
 ### Modifica el campo texto de las entradas donde el campo entero es menor a 30 y establece el texto como "Modificado".
 ```sql
 update Ejemplo set texto='Modificado' where entero<30;
 ```
-```sql
-+----+------------+--------+---------+------------+----------+
 | id |   texto    | entero | decimal |   fecha    | booleano |
-+----+------------+--------+---------+------------+----------+
+|----|------------|--------|---------|------------|----------|
 | 1  | Modificado | 25     | 10.5    | 2022-05-15 | 0        |
 | 3  | Modificado | 12     | 30.0    | 2022-07-10 | 0        |
 | 5  | Ejemplo5   | 42     | 18.9    | 2022-09-12 | 0        |
@@ -232,16 +220,13 @@ update Ejemplo set texto='Modificado' where entero<30;
 | 45 | Ejemplo45  | 50     | 15.9    | 2026-01-16 | 0        |
 | 47 | Modificado | 7      | 35.2    | 2026-03-22 | 0        |
 | 49 | Modificado | 28     | 50.0    | 2026-05-25 | 0        |
-+----+------------+--------+---------+------------+----------+
-```
+
 ### Elimina las entradas donde el campo entero es igual a 50.
 ```sql
 delete from Ejemplo where entero=50;
 ```
-```sql
-+----+------------+--------+---------+------------+----------+
 | id |   texto    | entero | decimal |   fecha    | booleano |
-+----+------------+--------+---------+------------+----------+
+|----|------------|--------|---------|------------|----------|
 | 1  | Modificado | 25     | 10.5    | 2022-05-15 | 0        |
 | 3  | Modificado | 12     | 30.0    | 2022-07-10 | 0        |
 | 5  | Ejemplo5   | 42     | 18.9    | 2022-09-12 | 0        |
@@ -266,16 +251,13 @@ delete from Ejemplo where entero=50;
 | 43 | Modificado | 14     | 42.7    | 2025-11-13 | 0        |
 | 47 | Modificado | 7      | 35.2    | 2026-03-22 | 0        |
 | 49 | Modificado | 28     | 50.0    | 2026-05-25 | 0        |
-+----+------------+--------+---------+------------+----------+
-```
+
 ### Incrementa en 10 el valor del campo entero para las entradas donde el campo booleano es igual a False.
 ```sql
 update Ejemplo set entero=entero + 10 where booleano=0;
 ```
-```sql
-+----+------------+--------+---------+------------+----------+
 | id |   texto    | entero | decimal |   fecha    | booleano |
-+----+------------+--------+---------+------------+----------+
+|----|------------|--------|---------|------------|----------|
 | 1  | Modificado | 35     | 10.5    | 2022-05-15 | 0        |
 | 3  | Modificado | 22     | 30.0    | 2022-07-10 | 0        |
 | 5  | Ejemplo5   | 52     | 18.9    | 2022-09-12 | 0        |
@@ -300,31 +282,24 @@ update Ejemplo set entero=entero + 10 where booleano=0;
 | 43 | Modificado | 24     | 42.7    | 2025-11-13 | 0        |
 | 47 | Modificado | 17     | 35.2    | 2026-03-22 | 0        |
 | 49 | Modificado | 38     | 50.0    | 2026-05-25 | 0        |
-+----+------------+--------+---------+------------+----------+
-```
+
 ### Elimina las entradas donde el campo decimal es menor a 50.
 ```sql
 delete from Ejemplo where decimal<50;
 ```
-```sql
-+----+------------+--------+---------+------------+----------+
 | id |   texto    | entero | decimal |   fecha    | booleano |
-+----+------------+--------+---------+------------+----------+
+|----|------------|--------|---------|------------|----------|
 | 9  | Ejemplo9   | 41     | 55.0    | 2023-01-20 | 0        |
 | 29 | Modificado | 37     | 50.0    | 2024-09-10 | 0        |
 | 49 | Modificado | 38     | 50.0    | 2026-05-25 | 0        |
-+----+------------+--------+---------+------------+----------+
-```
+
 ### Actualiza el campo fecha de todas las entradas a la fecha actual.
 ```sql
 update Ejemplo set fecha=current_date;
 ```
-```sql
-+----+------------+--------+---------+------------+----------+
+
 | id |   texto    | entero | decimal |   fecha    | booleano |
-+----+------------+--------+---------+------------+----------+
+|----|------------|--------|---------|------------|----------|
 | 9  | Ejemplo9   | 41     | 55.0    | 2023-12-15 | 0        |
 | 29 | Modificado | 37     | 50.0    | 2023-12-15 | 0        |
 | 49 | Modificado | 38     | 50.0    | 2023-12-15 | 0        |
-+----+------------+--------+---------+------------+----------+
-```
