@@ -1,6 +1,6 @@
 # Tarea 9
 ## Creación de fichero base-datos-clientes.sql.
-Creamos un fichero nano en el que insertamos la información proporcionada en el archivo adjunto en la carpeta tarea8 con el siguente comando:
+Creamos un fichero nano en el que insertamos la información proporcionada en el archivo adjunto en la carpeta tarea9 con el siguente comando:
 ```sql
 nano base-datos-clientes.sql
 ```
