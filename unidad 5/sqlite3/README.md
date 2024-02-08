@@ -1,12 +1,12 @@
 # SQLITE
 ## Para crear una base de datos
 ```sql
-sqlite3 comment_section.db
+sqlite3 tarea.db
 ```
 
 ## Importar archivo .sql
 ```sql
-sqlite3 comment_section.db
+sqlite3 tarea.db
 .read fihero.sql
 ```
 
@@ -15,6 +15,12 @@ sqlite3 comment_section.db
 .output fichero.sql
 .dump
 .exit 
+```
+
+## Lectura del fichero .db
+```sql
+sqlite3 tarea10.db 
+.open chinook.db
 ```
 
 ## Tipos de datos
