@@ -12,10 +12,17 @@ Por medio del comando dado a continuación realizamos la creacion de la tabla y 
 ## Realización de consultas
 ### Proporciona una consulta que muestre solo los clientes de Brasil.
 ```sql
+select country from customers where country='Brasil';
 ```
 ### Proporciona una consulta que muestre las facturas de clientes que son de Brasil. La tabla resultante debe mostrar el nombre completo del cliente, ID de factura, fecha de la factura y país de facturación.
 ```sql
+sqlite> select c.firstname || ' ' || c.lastname as full_name, i.invoiceid, i.invoicedate, i.billingcity from customers as c, invoices as i where i.invoiceid=c.customerid and c.country='Brasil';
 ```
+```sql
+select c.firstname || ' ' || c.lastname as full_name, i.invoiceid, i.invoicedate, i.billingcity from invoices as i inner join customers as c on i.invoiceid=c.customerid and c.country='Brasil';
+```
+-- La consulta se devuelve vacía
+
 ### Proporciona una consulta que muestre solo los empleados que son Agentes de Ventas.
 ```sql
 ```

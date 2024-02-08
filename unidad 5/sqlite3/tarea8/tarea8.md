@@ -50,16 +50,16 @@ select marca, count(*) as cantidad from coches group by marca;
 ```
 |   marca    | cantidad |
 |------------|----------|
-| Chevrolet  | 2        |
-| Ford       | 2        |
-| Honda      | 2        |
-| Hyundai    | 2        |
-| Mazda      | 2        |
-| Nissan     | 2        |
-| Ram        | 2        |
-| Tesla      | 2        |
-| Toyota     | 2        |
-| Volkswagen | 2        |
+| Chevrolet  | 1        |
+| Ford       | 1        |
+| Honda      | 1        |
+| Hyundai    | 1        |
+| Mazda      | 1        |
+| Nissan     | 1        |
+| Ram        | 1        |
+| Tesla      | 1        |
+| Toyota     | 1        |
+| Volkswagen | 1        |
 
 ### Consulta para obtener el nombre y la dirección de los clientes que han llevado a reparar sus coches en 2024.
 ```sql
@@ -118,7 +118,7 @@ select substr(fecha_venta, 1, 4) as año, count(*) as cantidad_ventas from venta
 ```
 | año  | cantidad_ventas |
 |------|-----------------|
-| 2023 | 18              |
+| 2023 | 9               |
 
 ### Consulta para obtener el nombre y la edad de los clientes que han comprado coches de más de 30000 euros y llevado a reparar sus coches.
 ```sql
@@ -136,7 +136,7 @@ select distinct sum(co.precio) as precio_total_ventas from coches as co, cliente
 ```
 | precio_total_ventas |
 |---------------------|
-| 62000.0             |
+| 117000.0            |
 
 ### Consulta para obtener el modelo y el año de los coches vendidos en 2023 y llevados a reparar.
 ```sql
@@ -160,15 +160,15 @@ select cl.id_cliente, cl.nombre, count(*) as coches_vendidos from clientes as cl
 ```
 | id_cliente |     nombre      | coches_vendidos |
 |------------|-----------------|-----------------|
-| 1          | Juan Pérez      | 2               |
-| 2          | María Gómez     | 2               |
-| 3          | Carlos López    | 2               |
-| 4          | Ana Martínez    | 2               |
-| 5          | Pedro Rodríguez | 2               |
-| 6          | Laura Sánchez   | 2               |
-| 7          | Miguel González | 2               |
-| 8          | Isabel Díaz     | 2               |
-| 10         | Elena Torres    | 2               |
+| 1          | Juan Pérez      | 1               |
+| 2          | María Gómez     | 1               |
+| 3          | Carlos López    | 1               |
+| 4          | Ana Martínez    | 1               |
+| 5          | Pedro Rodríguez | 1               |
+| 6          | Laura Sánchez   | 1               |
+| 7          | Miguel González | 1               |
+| 8          | Isabel Díaz     | 1               |
+| 10         | Elena Torres    | 1               |
 
 ### Consulta para obtener el nombre y el precio de los coches vendidos a clientes mayores de 35 años.
 ```sql
@@ -185,7 +185,7 @@ select sum(co.precio) as precio_total from coches as co, clientes as cl, ventas 
 ```
 | precio_total |
 |--------------|
-| 228000.0     |
+| 114000.0     |
 
 ### Consulta para obtener el nombre y la dirección de los clientes que han comprado coches de más de 30000 euros y llevado a reparar sus coches en 2024.
 ```sql
@@ -219,13 +219,13 @@ select cl.id_cliente, cl.nombre, count(*) as cantidad_reparaciones from clientes
 ```
 | id_cliente |     nombre      | cantidad_reparaciones |
 |------------|-----------------|-----------------------|
-| 1          | Juan Pérez      | 4                     |
-| 2          | María Gómez     | 4                     |
-| 3          | Carlos López    | 4                     |
-| 4          | Ana Martínez    | 4                     |
-| 5          | Pedro Rodríguez | 4                     |
-| 6          | Laura Sánchez   | 4                     |
-| 7          | Miguel González | 4                     |
-| 8          | Isabel Díaz     | 4                     |
-| 9          | Francisco Ruiz  | 4                     |
-| 10         | Elena Torres    | 4                     |
+| 1          | Juan Pérez      | 2                     |
+| 2          | María Gómez     | 2                     |
+| 3          | Carlos López    | 2                     |
+| 4          | Ana Martínez    | 2                     |
+| 5          | Pedro Rodríguez | 2                     |
+| 6          | Laura Sánchez   | 2                     |
+| 7          | Miguel González | 2                     |
+| 8          | Isabel Díaz     | 2                     |
+| 9          | Francisco Ruiz  | 2                     |
+| 10         | Elena Torres    | 2                     |
