@@ -464,14 +464,278 @@ select t.name, t.composer, i.invoicelineid from tracks as t join invoice_items a
 -- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
 
 ### Proporciona una consulta que muestre el número total de pistas en cada lista de reproducción. El nombre de la lista de reproducción debe estar incluido en la tabla resultante.
+-- with WHERE
 ```sql
+select p.name as PlaylistName, count(pt.trackid) as TotalTracks from playlists as p, playlist_track as pt where p.playlistid=pt.playlistid group by p.playlistid, p.name;
 ```
+-- with JOIN
+```sql
+select p.name as PlaylistName, count(pt.trackid) as TotalTracks from playlists as p join playlist_track as pt on p.playlistid=pt.playlistid group by p.playlistid, p.name;
+```
+|        PlaylistName        | TotalTracks |
+|----------------------------|-------------|
+| Music                      | 3290        |
+| TV Shows                   | 213         |
+| 90’s Music                 | 1477        |
+| Music                      | 3290        |
+| Music Videos               | 1           |
+| TV Shows                   | 213         |
+| Brazilian Music            | 39          |
+| Classical                  | 75          |
+| Classical 101 - Deep Cuts  | 25          |
+| Classical 101 - Next Steps | 25          |
+| Classical 101 - The Basics | 25          |
+| Grunge                     | 15          |
+| Heavy Metal Classic        | 26          |
+| On-The-Go 1                | 1           |
+
 ### Proporciona una consulta que muestre todas las pistas, pero no muestre IDs. La tabla resultante debe incluir el nombre del álbum, el tipo de medio y el género.
+-- with WHERE
 ```sql
+select distinct a.Title as AlbumTitle, mt.name as MediaType, g.Name as TrackGenre from tracks as t, genres as g, albums as a, media_types as mt where t.genreid=g.genreid and a.albumid=t.albumid and t.mediatypeid=mt.mediatypeid;
 ```
+-- with JOIN
+```sql
+select distinct a.Title as AlbumTitle, mt.name as MediaType, g.Name as TrackGenre from tracks as t join genres as g on t.genreid=g.genreid join albums as a on a.albumid=t.albumid join media_types as mt on t.mediatypeid=mt.mediatypeid;
+```
+|                                           AlbumTitle                                            |          MediaType          |     TrackGenre     |
+|-------------------------------------------------------------------------------------------------|-----------------------------|--------------------|
+| For Those About To Rock We Salute You                                                           | MPEG audio file             | Rock               |
+| Balls to the Wall                                                                               | Protected AAC audio file    | Rock               |
+| Restless and Wild                                                                               | Protected AAC audio file    | Rock               |
+| Let There Be Rock                                                                               | MPEG audio file             | Rock               |
+| Big Ones                                                                                        | MPEG audio file             | Rock               |
+| Jagged Little Pill                                                                              | MPEG audio file             | Rock               |
+| Facelift                                                                                        | MPEG audio file             | Rock               |
+| Audioslave                                                                                      | MPEG audio file             | Rock               |
+| BBC Sessions [Disc 1] [Live]                                                                    | MPEG audio file             | Rock               |
+| Bongo Fury                                                                                      | MPEG audio file             | Rock               |
+| Greatest Hits II                                                                                | MPEG audio file             | Rock               |
+| Greatest Kiss                                                                                   | MPEG audio file             | Rock               |
+| Into The Light                                                                                  | MPEG audio file             | Rock               |
+| MK III The Final Concerts [Disc 1]                                                              | MPEG audio file             | Rock               |
+| Physical Graffiti [Disc 1]                                                                      | MPEG audio file             | Rock               |
+| Supernatural                                                                                    | MPEG audio file             | Rock               |
+| The Final Concerts (Disc 2)                                                                     | MPEG audio file             | Rock               |
+| In Your Honor [Disc 1]                                                                          | MPEG audio file             | Rock               |
+| In Your Honor [Disc 2]                                                                          | MPEG audio file             | Rock               |
+| The Colour And The Shape                                                                        | MPEG audio file             | Rock               |
+| Appetite for Destruction                                                                        | Protected AAC audio file    | Rock               |
+| Use Your Illusion I                                                                             | Protected AAC audio file    | Rock               |
+| A Matter of Life and Death                                                                      | Protected AAC audio file    | Rock               |
+| Brave New World                                                                                 | MPEG audio file             | Rock               |
+| Fear Of The Dark                                                                                | MPEG audio file             | Rock               |
+| Live At Donington 1992 (Disc 1)                                                                 | MPEG audio file             | Rock               |
+| Live At Donington 1992 (Disc 2)                                                                 | MPEG audio file             | Rock               |
+| Rock In Rio [CD2]                                                                               | MPEG audio file             | Rock               |
+| Maquinarama                                                                                     | MPEG audio file             | Rock               |
+| O Samba Poconé                                                                                  | MPEG audio file             | Rock               |
+| A-Sides                                                                                         | MPEG audio file             | Rock               |
+| Core                                                                                            | MPEG audio file             | Rock               |
+| [1997] Black Light Syndrome                                                                     | MPEG audio file             | Rock               |
+| Beyond Good And Evil                                                                            | MPEG audio file             | Rock               |
+| Pure Cult: The Best Of The Cult (For Rockers, Ravers, Lovers & Sinners) [UK]                    | MPEG audio file             | Rock               |
+| 20th Century Masters - The Millennium Collection: The Best of Scorpions                         | Protected AAC audio file    | Rock               |
+| Every Kind of Light                                                                             | AAC audio file              | Rock               |
+| Warner 25 Anos                                                                                  | MPEG audio file             | Jazz               |
+| The Best Of Billy Cobham                                                                        | MPEG audio file             | Jazz               |
+| Heart of the Night                                                                              | MPEG audio file             | Jazz               |
+| The Essential Miles Davis [Disc 1]                                                              | MPEG audio file             | Jazz               |
+| The Essential Miles Davis [Disc 2]                                                              | MPEG audio file             | Jazz               |
+| Up An' Atom                                                                                     | MPEG audio file             | Jazz               |
+| Outbreak                                                                                        | MPEG audio file             | Jazz               |
+| Quanta Gente Veio ver--Bônus De Carnaval                                                        | MPEG audio file             | Jazz               |
+| Blue Moods                                                                                      | MPEG audio file             | Jazz               |
+| Miles Ahead                                                                                     | MPEG audio file             | Jazz               |
+| Morning Dance                                                                                   | MPEG audio file             | Jazz               |
+| Quiet Songs                                                                                     | AAC audio file              | Jazz               |
+| Worlds                                                                                          | AAC audio file              | Jazz               |
+| Plays Metallica By Four Cellos                                                                  | MPEG audio file             | Metal              |
+| Alcohol Fueled Brewtality Live! [Disc 1]                                                        | MPEG audio file             | Metal              |
+| Alcohol Fueled Brewtality Live! [Disc 2]                                                        | MPEG audio file             | Metal              |
+| Black Sabbath                                                                                   | MPEG audio file             | Metal              |
+| Black Sabbath Vol. 4 (Remaster)                                                                 | MPEG audio file             | Metal              |
+| Chemical Wedding                                                                                | MPEG audio file             | Metal              |
+| Garage Inc. (Disc 1)                                                                            | MPEG audio file             | Metal              |
+| Faceless                                                                                        | MPEG audio file             | Metal              |
+| Use Your Illusion II                                                                            | MPEG audio file             | Metal              |
+| A Real Dead One                                                                                 | MPEG audio file             | Metal              |
+| A Real Live One                                                                                 | MPEG audio file             | Metal              |
+| Rock In Rio [CD1]                                                                               | MPEG audio file             | Metal              |
+| Rock In Rio [CD2]                                                                               | MPEG audio file             | Metal              |
+| Kill 'Em All                                                                                    | MPEG audio file             | Metal              |
+| Load                                                                                            | MPEG audio file             | Metal              |
+| Master Of Puppets                                                                               | MPEG audio file             | Metal              |
+| Out Of Time                                                                                     | MPEG audio file             | Alternative & Punk |
+| Green                                                                                           | MPEG audio file             | Alternative & Punk |
+| The Best Of R.E.M.: The IRS Years                                                               | MPEG audio file             | Alternative & Punk |
+| Cesta Básica                                                                                    | MPEG audio file             | Alternative & Punk |
+| Blood Sugar Sex Magik                                                                           | MPEG audio file             | Alternative & Punk |
+| Judas 0: B-Sides and Rarities                                                                   | MPEG audio file             | Alternative & Punk |
+| Rotten Apples: Greatest Hits                                                                    | MPEG audio file             | Alternative & Punk |
+| The Singles                                                                                     | MPEG audio file             | Alternative & Punk |
+| Tangents                                                                                        | MPEG audio file             | Alternative & Punk |
+| Transmission                                                                                    | MPEG audio file             | Alternative & Punk |
+| Acústico                                                                                        | MPEG audio file             | Alternative & Punk |
+| Volume Dois                                                                                     | MPEG audio file             | Alternative & Punk |
+| BackBeat Soundtrack                                                                             | MPEG audio file             | Rock And Roll      |
+| The Best Of Buddy Guy - The Millenium Collection                                                | MPEG audio file             | Blues              |
+| The Cream Of Clapton                                                                            | MPEG audio file             | Blues              |
+| Unplugged                                                                                       | MPEG audio file             | Blues              |
+| Iron Maiden                                                                                     | MPEG audio file             | Blues              |
+| In Step                                                                                         | MPEG audio file             | Blues              |
+| Live [Disc 1]                                                                                   | MPEG audio file             | Blues              |
+| Live [Disc 2]                                                                                   | MPEG audio file             | Blues              |
+| Prenda Minha                                                                                    | MPEG audio file             | Latin              |
+| Sozinho Remix Ao Vivo                                                                           | MPEG audio file             | Latin              |
+| Minha Historia                                                                                  | MPEG audio file             | Latin              |
+| Meus Momentos                                                                                   | MPEG audio file             | Latin              |
+| Sambas De Enredo 2001                                                                           | MPEG audio file             | Latin              |
+| The Best of Ed Motta                                                                            | MPEG audio file             | Latin              |
+| Vozes do MPB                                                                                    | MPEG audio file             | Latin              |
+| Cássia Eller - Coleção Sem Limite [Disc 2]                                                      | MPEG audio file             | Latin              |
+| Cássia Eller - Sem Limite [Disc 1]                                                              | MPEG audio file             | Latin              |
+| Djavan Ao Vivo - Vol. 02                                                                        | MPEG audio file             | Latin              |
+| Djavan Ao Vivo - Vol. 1                                                                         | MPEG audio file             | Latin              |
+| Jota Quest-1995                                                                                 | MPEG audio file             | Latin              |
+| A TempestadeTempestade Ou O Livro Dos Dias                                                      | MPEG audio file             | Latin              |
+| Mais Do Mesmo                                                                                   | MPEG audio file             | Latin              |
+| Lulu Santos - RCA 100 Anos De Música - Álbum 01                                                 | MPEG audio file             | Latin              |
+| Lulu Santos - RCA 100 Anos De Música - Álbum 02                                                 | MPEG audio file             | Latin              |
+| Vinicius De Moraes                                                                              | MPEG audio file             | Latin              |
+| Ao Vivo [IMPORT]                                                                                | MPEG audio file             | Latin              |
+| Duos II                                                                                         | AAC audio file              | Latin              |
+| Acústico MTV [Live]                                                                             | MPEG audio file             | Reggae             |
+| Cidade Negra - Hits                                                                             | MPEG audio file             | Reggae             |
+| Greatest Hits                                                                                   | MPEG audio file             | Reggae             |
+| UB40 The Best Of - Volume Two [UK]                                                              | MPEG audio file             | Reggae             |
+| Axé Bahia 2001                                                                                  | MPEG audio file             | Pop                |
+| Instant Karma: The Amnesty International Campaign to Save Darfur                                | Protected AAC audio file    | Pop                |
+| Frank                                                                                           | Protected AAC audio file    | Pop                |
+| Carnaval 2001                                                                                   | MPEG audio file             | Soundtrack         |
+| As Canções de Eu Tu Eles                                                                        | MPEG audio file             | Soundtrack         |
+| Original Soundtracks 1                                                                          | MPEG audio file             | Soundtrack         |
+| Koyaanisqatsi (Soundtrack from the Motion Picture)                                              | Protected AAC audio file    | Soundtrack         |
+| Vinícius De Moraes - Sem Limite                                                                 | MPEG audio file             | Bossa Nova         |
+| My Way: The Best Of Frank Sinatra [Disc 1]                                                      | MPEG audio file             | Easy Listening     |
+| Dance Of Death                                                                                  | MPEG audio file             | Heavy Metal        |
+| Killers                                                                                         | MPEG audio file             | Heavy Metal        |
+| Live After Death                                                                                | MPEG audio file             | Heavy Metal        |
+| Sex Machine                                                                                     | MPEG audio file             | R&B/Soul           |
+| Synkronized                                                                                     | MPEG audio file             | R&B/Soul           |
+| Seek And Shall Find: More Of The Best (1963-1981)                                               | MPEG audio file             | R&B/Soul           |
+| Back to Black                                                                                   | Protected AAC audio file    | R&B/Soul           |
+| The Return Of The Space Cowboy                                                                  | MPEG audio file             | Electronica/Dance  |
+| Radio Brasil (O Som da Jovem Vanguarda) - Seleccao de Henrique Amaro                            | MPEG audio file             | Electronica/Dance  |
+| Realize                                                                                         | AAC audio file              | Electronica/Dance  |
+| Cafezinho                                                                                       | MPEG audio file             | World              |
+| Demorou...                                                                                      | MPEG audio file             | World              |
+| Muso Ko                                                                                         | AAC audio file              | World              |
+| Os Cães Ladram Mas A Caravana Não Pára                                                          | MPEG audio file             | Hip Hop/Rap        |
+| House of Pain                                                                                   | MPEG audio file             | Hip Hop/Rap        |
+| Battlestar Galactica: The Story So Far                                                          | Protected MPEG-4 video file | Science Fiction    |
+| Battlestar Galactica, Season 3                                                                  | Protected MPEG-4 video file | Science Fiction    |
+| Battlestar Galactica, Season 3                                                                  | Protected MPEG-4 video file | TV Shows           |
+| Heroes, Season 1                                                                                | Protected MPEG-4 video file | TV Shows           |
+| Lost, Season 3                                                                                  | Protected MPEG-4 video file | TV Shows           |
+| Lost, Season 1                                                                                  | Protected MPEG-4 video file | TV Shows           |
+| Lost, Season 2                                                                                  | Protected MPEG-4 video file | TV Shows           |
+| The Office, Season 1                                                                            | Protected MPEG-4 video file | TV Shows           |
+| The Office, Season 2                                                                            | Protected MPEG-4 video file | TV Shows           |
+| The Office, Season 3                                                                            | Protected MPEG-4 video file | TV Shows           |
+| Aquaman                                                                                         | Protected MPEG-4 video file | TV Shows           |
+| LOST, Season 4                                                                                  | Protected MPEG-4 video file | TV Shows           |
+| Battlestar Galactica, Season 3                                                                  | Protected MPEG-4 video file | Sci Fi & Fantasy   |
+| Battlestar Galactica (Classic), Season 1                                                        | Protected MPEG-4 video file | Sci Fi & Fantasy   |
+| Heroes, Season 1                                                                                | Protected MPEG-4 video file | Drama              |
+| Lost, Season 3                                                                                  | Protected MPEG-4 video file | Drama              |
+| Lost, Season 2                                                                                  | Protected MPEG-4 video file | Drama              |
+| LOST, Season 4                                                                                  | Protected MPEG-4 video file | Drama              |
+| The Office, Season 3                                                                            | Protected MPEG-4 video file | Comedy             |
+| Cake: B-Sides and Rarities                                                                      | Purchased AAC audio file    | Alternative        |
+| Temple of the Dog                                                                               | Protected AAC audio file    | Alternative        |
+| Carry On                                                                                        | Protected AAC audio file    | Alternative        |
+| Revelations                                                                                     | Protected AAC audio file    | Alternative        |
+| Revelations                                                                                     | Protected MPEG-4 video file | Alternative        |
+| Carried to Dust (Bonus Track Version)                                                           | Protected AAC audio file    | Alternative        |
+| The Best of Beethoven                                                                           | AAC audio file              | Classical          |
+| Adorate Deum: Gregorian Chant from the Proper of the Mass                                       | Protected AAC audio file    | Classical          |
+| Allegri: Miserere                                                                               | Protected AAC audio file    | Classical          |
+| Pachelbel: Canon & Gigue                                                                        | Protected AAC audio file    | Classical          |
+| Vivaldi: The Four Seasons                                                                       | Protected AAC audio file    | Classical          |
+| Bach: Violin Concertos                                                                          | Protected AAC audio file    | Classical          |
+| Bach: Goldberg Variations                                                                       | Protected AAC audio file    | Classical          |
+| Bach: The Cello Suites                                                                          | Protected AAC audio file    | Classical          |
+| Handel: The Messiah (Highlights)                                                                | Protected AAC audio file    | Classical          |
+| The World of Classical Favourites                                                               | Protected AAC audio file    | Classical          |
+| Sir Neville Marriner: A Celebration                                                             | Protected AAC audio file    | Classical          |
+| Mozart: Wind Concertos                                                                          | Protected AAC audio file    | Classical          |
+| Haydn: Symphonies 99 - 104                                                                      | Purchased AAC audio file    | Classical          |
+| Beethoven: Symhonies Nos. 5 & 6                                                                 | Protected AAC audio file    | Classical          |
+| Scheherazade                                                                                    | Protected AAC audio file    | Classical          |
+| Bach: The Brandenburg Concertos                                                                 | Protected AAC audio file    | Classical          |
+| Chopin: Piano Concertos Nos. 1 & 2                                                              | Protected AAC audio file    | Classical          |
+| Mascagni: Cavalleria Rusticana                                                                  | Protected AAC audio file    | Classical          |
+| Sibelius: Finlandia                                                                             | Protected AAC audio file    | Classical          |
+| Beethoven Piano Sonatas: Moonlight & Pastorale                                                  | Protected AAC audio file    | Classical          |
+| Mozart Gala: Famous Arias                                                                       | Protected AAC audio file    | Opera              |
+
+-- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
+
 ### Proporciona una consulta que muestre todas las facturas.
 ```sql
+select * from invoices;
 ```
+| InvoiceId | CustomerId |     InvoiceDate     |              BillingAddress              |     BillingCity     | BillingState | BillingCountry | BillingPostalCode | Total |
+|-----------|------------|---------------------|------------------------------------------|---------------------|--------------|----------------|-------------------|-------|
+| 1         | 2          | 2009-01-01 00:00:00 | Theodor-Heuss-Straße 34                  | Stuttgart           |              | Germany        | 70174             | 1.98  |
+| 2         | 4          | 2009-01-02 00:00:00 | Ullevålsveien 14                         | Oslo                |              | Norway         | 0171              | 3.96  |
+| 3         | 8          | 2009-01-03 00:00:00 | Grétrystraat 63                          | Brussels            |              | Belgium        | 1000              | 5.94  |
+| 4         | 14         | 2009-01-06 00:00:00 | 8210 111 ST NW                           | Edmonton            | AB           | Canada         | T6G 2C7           | 8.91  |
+| 5         | 23         | 2009-01-11 00:00:00 | 69 Salem Street                          | Boston              | MA           | USA            | 2113              | 13.86 |
+| 6         | 37         | 2009-01-19 00:00:00 | Berger Straße 10                         | Frankfurt           |              | Germany        | 60316             | 0.99  |
+| 7         | 38         | 2009-02-01 00:00:00 | Barbarossastraße 19                      | Berlin              |              | Germany        | 10779             | 1.98  |
+| 8         | 40         | 2009-02-01 00:00:00 | 8, Rue Hanovre                           | Paris               |              | France         | 75002             | 1.98  |
+| 9         | 42         | 2009-02-02 00:00:00 | 9, Place Louis Barthou                   | Bordeaux            |              | France         | 33000             | 3.96  |
+| 10        | 46         | 2009-02-03 00:00:00 | 3 Chatham Street                         | Dublin              | Dublin       | Ireland        |                   | 5.94  |
+| 11        | 52         | 2009-02-06 00:00:00 | 202 Hoxton Street                        | London              |              | United Kingdom | N1 5LH            | 8.91  |
+| 12        | 2          | 2009-02-11 00:00:00 | Theodor-Heuss-Straße 34                  | Stuttgart           |              | Germany        | 70174             | 13.86 |
+| 13        | 16         | 2009-02-19 00:00:00 | 1600 Amphitheatre Parkway                | Mountain View       | CA           | USA            | 94043-1351        | 0.99  |
+| 14        | 17         | 2009-03-04 00:00:00 | 1 Microsoft Way                          | Redmond             | WA           | USA            | 98052-8300        | 1.98  |
+| 15        | 19         | 2009-03-04 00:00:00 | 1 Infinite Loop                          | Cupertino           | CA           | USA            | 95014             | 1.98  |
+| 16        | 21         | 2009-03-05 00:00:00 | 801 W 4th Street                         | Reno                | NV           | USA            | 89503             | 3.96  |
+| 17        | 25         | 2009-03-06 00:00:00 | 319 N. Frances Street                    | Madison             | WI           | USA            | 53703             | 5.94  |
+| 18        | 31         | 2009-03-09 00:00:00 | 194A Chain Lake Drive                    | Halifax             | NS           | Canada         | B3S 1C5           | 8.91  |
+| 19        | 40         | 2009-03-14 00:00:00 | 8, Rue Hanovre                           | Paris               |              | France         | 75002             | 13.86 |
+| 20        | 54         | 2009-03-22 00:00:00 | 110 Raeburn Pl                           | Edinburgh           |              | United Kingdom | EH4 1HH           | 0.99  |
+| 21        | 55         | 2009-04-04 00:00:00 | 421 Bourke Street                        | Sidney              | NSW          | Australia      | 2010              | 1.98  |
+| 22        | 57         | 2009-04-04 00:00:00 | Calle Lira, 198                          | Santiago            |              | Chile          |                   | 1.98  |
+| 23        | 59         | 2009-04-05 00:00:00 | 3,Raj Bhavan Road                        | Bangalore           |              | India          | 560001            | 3.96  |
+| 24        | 4          | 2009-04-06 00:00:00 | Ullevålsveien 14                         | Oslo                |              | Norway         | 0171              | 5.94  |
+| 25        | 10         | 2009-04-09 00:00:00 | Rua Dr. Falcão Filho, 155                | São Paulo           | SP           | Brazil         | 01007-010         | 8.91  |
+| 26        | 19         | 2009-04-14 00:00:00 | 1 Infinite Loop                          | Cupertino           | CA           | USA            | 95014             | 13.86 |
+| 27        | 33         | 2009-04-22 00:00:00 | 5112 48 Street                           | Yellowknife         | NT           | Canada         | X1A 1N6           | 0.99  |
+| 28        | 34         | 2009-05-05 00:00:00 | Rua da Assunção 53                       | Lisbon              |              | Portugal       |                   | 1.98  |
+| 29        | 36         | 2009-05-05 00:00:00 | Tauentzienstraße 8                       | Berlin              |              | Germany        | 10789             | 1.98  |
+| 30        | 38         | 2009-05-06 00:00:00 | Barbarossastraße 19                      | Berlin              |              | Germany        | 10779             | 3.96  |
+| 31        | 42         | 2009-05-07 00:00:00 | 9, Place Louis Barthou                   | Bordeaux            |              | France         | 33000             | 5.94  |
+| 32        | 48         | 2009-05-10 00:00:00 | Lijnbaansgracht 120bg                    | Amsterdam           | VV           | Netherlands    | 1016              | 8.91  |
+| 33        | 57         | 2009-05-15 00:00:00 | Calle Lira, 198                          | Santiago            |              | Chile          |                   | 13.86 |
+| 34        | 12         | 2009-05-23 00:00:00 | Praça Pio X, 119                         | Rio de Janeiro      | RJ           | Brazil         | 20040-020         | 0.99  |
+| 35        | 13         | 2009-06-05 00:00:00 | Qe 7 Bloco G                             | Brasília            | DF           | Brazil         | 71020-677         | 1.98  |
+| 36        | 15         | 2009-06-05 00:00:00 | 700 W Pender Street                      | Vancouver           | BC           | Canada         | V6C 1G8           | 1.98  |
+| 37        | 17         | 2009-06-06 00:00:00 | 1 Microsoft Way                          | Redmond             | WA           | USA            | 98052-8300        | 3.96  |
+| 38        | 21         | 2009-06-07 00:00:00 | 801 W 4th Street                         | Reno                | NV           | USA            | 89503             | 5.94  |
+| 39        | 27         | 2009-06-10 00:00:00 | 1033 N Park Ave                          | Tucson              | AZ           | USA            | 85719             | 8.91  |
+| 40        | 36         | 2009-06-15 00:00:00 | Tauentzienstraße 8                       | Berlin              |              | Germany        | 10789             | 13.86 |
+| 41        | 50         | 2009-06-23 00:00:00 | C/ San Bernardo 85                       | Madrid              |              | Spain          | 28015             | 0.99  |
+| 42        | 51         | 2009-07-06 00:00:00 | Celsiusg. 9                              | Stockholm           |              | Sweden         | 11230             | 1.98  |
+| 43        | 53         | 2009-07-06 00:00:00 | 113 Lupus St                             | London              |              | United Kingdom | SW1V 3EN          | 1.98  |
+| 44        | 55         | 2009-07-07 00:00:00 | 421 Bourke Street                        | Sidney              | NSW          | Australia      | 2010              | 3.96  |
+| 45        | 59         | 2009-07-08 00:00:00 | 3,Raj Bhavan Road                        | Bangalore           |              | India          | 560001            | 5.94  |
+
+-- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
+
 ### Proporciona una consulta que muestre las ventas totales realizadas por cada agente de ventas.
 ```sql
 ```
@@ -480,7 +744,29 @@ select t.name, t.composer, i.invoicelineid from tracks as t join invoice_items a
 ```
 ### Escribir una consulta que muestre todas las playlists de la base de datos.
 ```sql
+select * from playlists;
 ```
+| PlaylistId |            Name            |
+|------------|----------------------------|
+| 1          | Music                      |
+| 2          | Movies                     |
+| 3          | TV Shows                   |
+| 4          | Audiobooks                 |
+| 5          | 90’s Music                 |
+| 6          | Audiobooks                 |
+| 7          | Movies                     |
+| 8          | Music                      |
+| 9          | Music Videos               |
+| 10         | TV Shows                   |
+| 11         | Brazilian Music            |
+| 12         | Classical                  |
+| 13         | Classical 101 - Deep Cuts  |
+| 14         | Classical 101 - Next Steps |
+| 15         | Classical 101 - The Basics |
+| 16         | Grunge                     |
+| 17         | Heavy Metal Classic        |
+| 18         | On-The-Go 1                |
+
 ### Escribe una consulta que liste todas las canciones de una playlist.
 ```sql
 ```
