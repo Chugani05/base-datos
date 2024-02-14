@@ -737,11 +737,33 @@ select * from invoices;
 -- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
 
 ### Proporciona una consulta que muestre las ventas totales realizadas por cada agente de ventas.
+-- with WHERE
 ```sql
+select e.employeeid, e.firstname, count(i.invoiceid) as TotalSales from employees as e, customers as c, invoices as i where e.employeeid=c.supportrepid and c.customerid=i.customerid and e.title = 'Sales Support Agent' group by e.employeeid;
 ```
+-- with JOIN
+```sql
+select e.employeeid, e.firstname, count(i.invoiceid) as TotalSales from employees as e join customers as c on e.employeeid=c.supportrepid join invoices as i on c.customerid=i.customerid where e.title = 'Sales Support Agent' group by e.employeeid;
+```
+| EmployeeId | FirstName | TotalSales |
+|------------|-----------|------------|
+| 3          | Jane      | 146        |
+| 4          | Margaret  | 140        |
+| 5          | Steve     | 126        |
+
 ### ¿Qué agente de ventas realizó más ventas en 2009?
+-- with WHERE
 ```sql
+select e.employeeid, e.firstname, count(i.invoiceid) as TotalSales from employees as e, customers as c, invoices as i where e.employeeid=c.supportrepid and c.customerid=i.customerid and e.title = 'Sales Support Agent' and i.invoicedate regexp 2009 group by e.employeeid order by TotalSales desc limit 1;
 ```
+-- with JOIN
+```sql
+select e.employeeid, e.firstname, count(i.invoiceid) as TotalSales from employees as e join customers as c on e.employeeid=c.supportrepid join invoices as i on c.customerid=i.customerid where e.title = 'Sales Support Agent' and i.invoicedate regexp 2009 group by e.employeeid order by TotalSales desc limit 1;
+```
+| EmployeeId | FirstName | TotalSales |
+|------------|-----------|------------|
+| 4          | Margaret  | 30         |
+
 ### Escribir una consulta que muestre todas las playlists de la base de datos.
 ```sql
 select * from playlists;
@@ -768,8 +790,66 @@ select * from playlists;
 | 18         | On-The-Go 1                |
 
 ### Escribe una consulta que liste todas las canciones de una playlist.
+-- with WHERE
 ```sql
+select distinct t.trackid, t.Name as TrackName, p.Name as PlaylistName from playlists as p, playlist_track as pt, tracks as t where p.playlistid=pt.playlistid and pt.trackid=t.trackid order by p.Name;
 ```
+-- with JOIN
+```sql
+select distinct t.trackid, t.Name as TrackName, p.Name as PlaylistName from playlists as p join playlist_track as pt on p.playlistid=pt.playlistid join tracks as t on pt.trackid=t.trackid order by p.Name;
+```
+| TrackId |        TrackName        | PlaylistName |
+|---------|-------------------------|--------------|
+| 52      | Man In The Box          | Grunge       |
+| 2003    | Smells Like Teen Spirit | Grunge       |
+| 2004    | In Bloom                | Grunge       |
+| 2005    | Come As You Are         | Grunge       |
+| 2007    | Lithium                 | Grunge       |
+| 2010    | Drain You               | Grunge       |
+| 2013    | On A Plain              | Grunge       |
+| 2194    | Evenflow                | Grunge       |
+| 2195    | Alive                   | Grunge       |
+| 2198    | Jeremy                  | Grunge       |
+| 2206    | Daughter                | Grunge       |
+| 2512    | Outshined               | Grunge       |
+| 2516    | Black Hole Sun          | Grunge       |
+| 2550    | Plush                   | Grunge       |
+| 3367    | Hunger Strike           | Grunge       |
+
 ### Escribe una consulta que liste exclusivamente el nombre de las canciones de una playlist concreta, con el nombre de su género y el nombre de tipo de medio.
+-- with WHERE
 ```sql
+select t.trackid, t.name as TrackName, g.name as TrackGenre, mt.name as MediaType, p.name as PlaylistName from playlists as p, playlist_track as pt, tracks as t, genres as g, media_types as mt where p.playlistid=pt.playlistid and pt.trackid=t.trackid and t.genreid=g.genreid and t.mediatypeid=mt.mediatypeid and p.name='Heavy Metal Classic';
 ```
+-- with JOIN
+```sql
+select t.trackid, t.name as TrackName, g.name as TrackGenre, mt.name as MediaType, p.name as PlaylistName from playlists as p join  playlist_track as pt on p.playlistid=pt.playlistid join tracks as t on pt.trackid=t.trackid join genres as g on t.genreid=g.genreid join media_types as mt on t.mediatypeid=mt.mediatypeid where p.name='Heavy Metal Classic';
+```
+| TrackId |                TrackName                | TrackGenre  |        MediaType         |    PlaylistName     |
+|---------|-----------------------------------------|-------------|--------------------------|---------------------|
+| 1       | For Those About To Rock (We Salute You) | Rock        | MPEG audio file          | Heavy Metal Classic |
+| 2       | Balls to the Wall                       | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 3       | Fast As a Shark                         | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 4       | Restless and Wild                       | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 5       | Princess of the Dawn                    | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 152     | N.I.B.                                  | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 160     | Supernaut                               | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1278    | Wrathchild                              | Heavy Metal | MPEG audio file          | Heavy Metal Classic |
+| 1283    | Killers                                 | Heavy Metal | MPEG audio file          | Heavy Metal Classic |
+| 1335    | Where Eagles Dare                       | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1345    | 2 Minutes To Midnight                   | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1380    | Wasted Years                            | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1392    | Run to the Hills                        | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1801    | Enter Sandman                           | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1830    | The Four Horsemen                       | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1837    | Seek & Destroy                          | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1854    | Master Of Puppets                       | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1876    | For Whom The Bell Tolls                 | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1880    | Creeping Death                          | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1942    | Ace Of Spades                           | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1945    | Live To Win                             | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 1984    | Looks That Kill                         | Metal       | MPEG audio file          | Heavy Metal Classic |
+| 2094    | I Don't Know                            | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 2095    | Crazy Train                             | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 2096    | Flying High Again                       | Rock        | Protected AAC audio file | Heavy Metal Classic |
+| 3290    | The Zoo                                 | Rock        | Protected AAC audio file | Heavy Metal Classic |
