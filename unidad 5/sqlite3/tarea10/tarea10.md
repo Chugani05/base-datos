@@ -292,12 +292,15 @@ select invoiceid, count(invoicelineid) as Items from invoice_items group by invo
 | 28        | 2     |
 | 29        | 2     |
 | 30        | 4     |
+
 -- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
 
 ### Proporciona una consulta que incluya el nombre de la pista con cada ítem de línea de factura.
+-- with WHERE
 ```sql
 select t.name, ii.invoicelineid from tracks as t, invoice_items as ii where ii.trackid=t.trackid;
 ```
+-- with JOIN
 ```sql
 select t.name, ii.invoicelineid from tracks as t join invoice_items as ii on ii.trackid = t.trackid;
 ```
@@ -333,12 +336,133 @@ select t.name, ii.invoicelineid from tracks as t join invoice_items as ii on ii.
 | Deuces Are Wild                              | 11            |
 | Deuces Are Wild                              | 1159          |
 | Angel                                        | 12            |
+| Livin' On The Edge                           | 586           |
+| All I Really Want                            | 1160          |
+| You Oughta Know                              | 1733          |
+| Right Through You                            | 13            |
+| Forgiven                                     | 587           |
+| You Learn                                    | 1161          |
+| Not The Doctor                               | 14            |
+| Not The Doctor                               | 1734          |
+| Wake Up                                      | 588           |
+| Sea Of Sorrow                                | 1162          |
+| Bleed The Freak                              | 15            |
+| I Can't Remember                             | 589           |
 
 -- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
 
 ### Proporciona una consulta que incluya el nombre de la pista comprada Y el nombre del artista con cada ítem de línea de factura.
+-- with WHERE
 ```sql
+select t.name, t.composer, i.invoicelineid from tracks as t, invoice_items as i where t.trackid = i.trackid;
 ```
+-- with JOIN
+```sql
+select t.name, t.composer, i.invoicelineid from tracks as t join invoice_items as i on t.trackid = i.trackid;
+```
+|                         Name                         |                      Composer                     | InvoiceLineId |
+|------------------------------------------------------|---------------------------------------------------|---------------|
+| Whatever Gets You Thru the Night                     |                                                   | 537           |
+| Gimme Some Truth                                     |                                                   | 538           |
+| Oh, My Love                                          |                                                   | 1114          |
+| Imagine                                              |                                                   | 1688          |
+| Jealous Guy                                          |                                                   | 539           |
+| Imagine                                              |                                                   | 1115          |
+| Beautiful Boy                                        |                                                   | 540           |
+| Beautiful Boy                                        |                                                   | 1689          |
+| Gimme Some Truth                                     |                                                   | 541           |
+| [Just Like] Starting Over                            |                                                   | 1116          |
+| God                                                  |                                                   | 1690          |
+| Symptom of the Universe                              |                                                   | 542           |
+| Fairies Wear Boots                                   |                                                   | 1117          |
+| War Pigs                                             |                                                   | 543           |
+| War Pigs                                             |                                                   | 1691          |
+| Never Say Die                                        |                                                   | 544           |
+| Sabbath, Bloody Sabbath                              |                                                   | 1118          |
+| Iron Man/Children of the Grave                       |                                                   | 1692          |
+| The Zoo                                              |                                                   | 545           |
+| Loving You Sunday Morning                            |                                                   | 1119          |
+| Still Loving You                                     |                                                   | 1693          |
+| I Can't Explain                                      |                                                   | 546           |
+| Tease Me Please Me                                   |                                                   | 1120          |
+| Salutations                                          | E. Schrody/L. Dimant                              | 1694          |
+| Put Your Head Out                                    | E. Schrody/L. Freese/L. Muggerud                  | 547           |
+| Top O' The Morning To Ya                             | E. Schrody/L. Dimant                              | 1121          |
+| Danny Boy, Danny Boy                                 | E. Schrody/L. Muggerud                            | 548           |
+| Guess Who's Back                                     | E. Schrody/L. Muggerud                            | 1122          |
+| Commercial 2                                         | L. Muggerud                                       | 1695          |
+| One For The Road                                     | E. Schrody/L. Dimant/L. Muggerud                  | 549           |
+| Feel It                                              | E. Schrody/R. Medrano                             | 1123          |
+| Instinto Colectivo                                   |                                                   | 1696          |
+| Chapa o Coco                                         |                                                   | 550           |
+| Um Lugar ao Sol                                      |                                                   | 1124          |
+| Todo o Carnaval tem seu Fim                          |                                                   | 551           |
+| Armadura                                             |                                                   | 1697          |
+| Funk de Bamba                                        |                                                   | 552           |
+| Chega no Suingue                                     |                                                   | 1125          |
+| Past, Present, and Future                            |                                                   | 1698          |
+| The Beginning of the End                             |                                                   | 553           |
+| The Economist                                        |                                                   | 1126          |
+| Ji Yeon                                              |                                                   | 1699          |
+| Meet Kevin Johnson                                   |                                                   | 554           |
+| Din Din Wo (Little Child)                            | Habib Koité                                       | 1127          |
+| Love Comes                                           | Darius "Take One" Minwalla/Jon Auer/Ken Stringfellow/Matt Harris | 1700 |
+| Muita Bobeira                                        | Luciana Souza                                     | 555           |
+| Something Nice Back Home                             |                                                   | 1128          |
+| There's No Place Like Home, Pt. 3                    |                                                   | 1701          |
+| Say Hello 2 Heaven                                   |                                                   | 556           |
+| Call Me a Dog                                        |                                                   | 1129          |
+| Four Walled World                                    |                                                   | 1702          |
+| All Night Thing                                      |                                                   | 557           |
+| Safe and Sound                                       | Chris Cornell                                     | 1130          |
+| Billie Jean                                          | Michael Jackson                                   | 1703          |
+| Scar On the Sky                                      | Chris Cornell                                     | 558           |
+| Disappearing Act                                     | Chris Cornell                                     | 1131          |
+| Sound of a Gun                                       |                                                   | 1704          |
+| Until We Fall                                        |                                                   | 559           |
+| Shape of Things to Come                              |                                                   | 1132          |
+| Moth                                                 |                                                   | 1705          |
+| Show Me How to Live (Live at the Quart Festival)     |                                                   | 560           |
+| Canon and Gigue in D Major: I. Canon                 | Johann Pachelbel                                  | 1133          |
+| Suite for Solo Cello No. 1 in G Major, BWV 1007: I. Prélude | Johann Sebastian Bach                      | 1706          |
+| The Messiah: Behold, I Tell You a Mystery... The Trumpet Shall Sound | George Frideric Handel            | 561           |
+| Symphony No. 104 in D Major "London": IV. Finale: Spiritoso | Franz Joseph Haydn                         | 1134          |
+| Die Walküre: The Ride of the Valkyries               | Richard Wagner                                    | 1707          |
+| Requiem, Op.48: 4. Pie Jesu                          | Gabriel Fauré                                     | 562           |
+| Jupiter, the Bringer of Jollity                      | Gustav Holst                                      | 1135          |
+| Branch Closing                                       |                                                   | 563           |
+| Scheherazade, Op. 35: I. The Sea and Sindbad's Ship  | Nikolai Rimsky-Korsakov                           | 1136          |
+| Scheherazade, Op. 35: I. The Sea and Sindbad's Ship  | Nikolai Rimsky-Korsakov                           | 1708          |
+| Concerto No.2 in F Major, BWV1047, I. Allegro        | Johann Sebastian Bach                             | 1709          |
+| Concerto for Piano No. 2 in F Minor, Op. 21: II. Larghetto | Frédéric Chopin                             | 1710          |
+| Karelia Suite, Op.11: 2. Ballade (Tempo Di Menuetto) | Jean Sibelius                                     | 1711          |
+| Piano Sonata No. 14 in C Sharp Minor, Op. 27, No. 2, "Moonlight": I. Adagio sostenuto | Ludwig van Beethoven | 564 |
+| Fantasia On Greensleeves                             | Ralph Vaughan Williams                            | 1712          |
+| Concerto for Cello and Orchestra in E minor, Op. 85: I. Adagio - Moderato | Edward Elgar                 | 1713          |
+| Two Fanfares for Orchestra: II. Short Ride in a Fast Machine | John Adams                                | 1137          |
+| Wellington's Victory or the Battle Symphony, Op.91: 2. Symphony of Triumph | Ludwig van Beethoven        | 1714          |
+| Romeo et Juliette: No. 11 - Danse des Chevaliers      |                                                  | 1715          |
+| Symphonie Fantastique, Op. 14: V. Songe d'une nuit du sabbat | Hector Berlioz                            | 565           |
+| Symphonie Fantastique, Op. 14: V. Songe d'une nuit du sabbat | Hector Berlioz                            | 1716          |
+| Peer Gynt Suite No.1, Op.46: 1. Morning Mood          | Edvard Grieg                                     | 1717          |
+| Symphony No. 41 in C Major, K. 551, "Jupiter": IV. Molto allegro | Wolfgang Amadeus Mozart               | 1718          |
+| Rehab                                                |                                                   | 566           |
+| Rehab                                                |                                                   | 1138          |
+| You Know I'm No Good                                 |                                                   | 1139          |
+| Me & Mr. Jones                                       |                                                   | 1140          |
+| Just Friends                                         |                                                   | 1719          |
+| Back to Black                                        | Mark Ronson                                       | 1141          |
+| Tears Dry On Their Own                               | Nickolas Ashford & Valerie Simpson                | 1142          |
+| Wake Up Alone                                        | Paul O'duffy                                      | 1720          |
+| Some Unholy War                                      |                                                   | 1143          |
+| He Can Only Hold Her                                 | Richard Poindexter & Robert Poindexter            | 567           |
+| You Know I'm No Good (feat. Ghostface Killah)        |                                                   | 1144          |
+| Rehab (Hot Chip Remix)                               |                                                   | 1721          |
+| Intro / Stronger Than Me                             |                                                   | 1145          |
+| F**k Me Pumps                                        | Salaam Remi                                       | 1146          |
+
+-- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
+
 ### Proporciona una consulta que muestre el número total de pistas en cada lista de reproducción. El nombre de la lista de reproducción debe estar incluido en la tabla resultante.
 ```sql
 ```
