@@ -301,38 +301,39 @@ select t.name, ii.invoicelineid from tracks as t, invoice_items as ii where ii.t
 ```sql
 select t.name, ii.invoicelineid from tracks as t join invoice_items as ii on ii.trackid = t.trackid;
 ```
-|                                                            Name                                                             | InvoiceLineId |
-|-----------------------------------------------------------------------------------------------------------------------------|---------------|
-| For Those About To Rock (We Salute You)                                                                                     | 579           |
-| Balls to the Wall                                                                                                           | 1             |
-| Balls to the Wall                                                                                                           | 1154          |
-| Fast As a Shark                                                                                                             | 1728          |
-| Restless and Wild                                                                                                           | 2             |
-| Princess of the Dawn                                                                                                        | 580           |
-| Put The Finger On You                                                                                                       | 3             |
-| Inject The Venom                                                                                                            | 4             |
-| Inject The Venom                                                                                                            | 1155          |
-| Snowballed                                                                                                                  | 581           |
-| Snowballed                                                                                                                  | 1729          |
-| Evil Walks                                                                                                                  | 5             |
-| Breaking The Rules                                                                                                          | 6             |
-| Night Of The Long Knives                                                                                                    | 582           |
-| Spellbound                                                                                                                  | 1156          |
-| Go Down                                                                                                                     | 1730          |
-| Dog Eat Dog                                                                                                                 | 7             |
-| Problem Child                                                                                                               | 583           |
-| Overdose                                                                                                                    | 8             |
-| Overdose                                                                                                                    | 1157          |
-| Hell Ain't A Bad Place To Be                                                                                                | 1731          |
-| Love In An Elevator                                                                                                         | 9             |
-| Rag Doll                                                                                                                    | 584           |
-| What It Takes                                                                                                               | 1158          |
-| Janie's Got A Gun                                                                                                           | 10            |
-| Amazing                                                                                                                     | 1732          |
-| Blind Man                                                                                                                   | 585           |
-| Deuces Are Wild                                                                                                             | 11            |
-| Deuces Are Wild                                                                                                             | 1159          |
-| Angel                                                                                                                       | 12            |
+|                       Name                   | InvoiceLineId |
+|----------------------------------------------|---------------|
+| For Those About To Rock (We Salute You)      | 579           |
+| Balls to the Wall                            | 1             |
+| Balls to the Wall                            | 1154          |
+| Fast As a Shark                              | 1728          |
+| Restless and Wild                            | 2             |
+| Princess of the Dawn                         | 580           |
+| Put The Finger On You                        | 3             |
+| Inject The Venom                             | 4             |
+| Inject The Venom                             | 1155          |
+| Snowballed                                   | 581           |
+| Snowballed                                   | 1729          |
+| Evil Walks                                   | 5             |
+| Breaking The Rules                           | 6             |
+| Night Of The Long Knives                     | 582           |
+| Spellbound                                   | 1156          |
+| Go Down                                      | 1730          |
+| Dog Eat Dog                                  | 7             |
+| Problem Child                                | 583           |
+| Overdose                                     | 8             |
+| Overdose                                     | 1157          |
+| Hell Ain't A Bad Place To Be                 | 1731          |
+| Love In An Elevator                          | 9             |
+| Rag Doll                                     | 584           |
+| What It Takes                                | 1158          |
+| Janie's Got A Gun                            | 10            |
+| Amazing                                      | 1732          |
+| Blind Man                                    | 585           |
+| Deuces Are Wild                              | 11            |
+| Deuces Are Wild                              | 1159          |
+| Angel                                        | 12            |
+
 -- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
 
 ### Proporciona una consulta que incluya el nombre de la pista comprada Y el nombre del artista con cada ítem de línea de factura.
