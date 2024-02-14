@@ -23,9 +23,11 @@ select * from customers where country='Brazil';
 | 13         | Fernanda  | Ramos     |                                                  | Qe 7 Bloco G                    | Brasília            | DF    | Brazil  | 71020-677  | +55 (61) 3363-5547 | +55 (61) 3363-7855 | fernadaramos4@uol.com.br      | 4            |
 
 ### Proporciona una consulta que muestre las facturas de clientes que son de Brasil. La tabla resultante debe mostrar el nombre completo del cliente, ID de factura, fecha de la factura y país de facturación.
+-- with WHERE
 ```sql
 select c.firstname || ' ' || c.lastname as FullName, i.invoiceid, i.invoicedate, i.billingcountry from customers as c, invoices as i where i.invoiceid=c.customerid and c.country='Brazil';
 ```
+-- with JOIN
 ```sql
 select c.firstname || ' ' || c.lastname as FullName, i.invoiceid, i.invoicedate, i.billingcountry from invoices as i inner join customers as c on i.invoiceid=c.customerid and c.country='Brazil';
 ```
@@ -79,9 +81,11 @@ select distinct billingcountry from invoices;
 | Argentina      |
 
 ### Proporciona una consulta que muestre las facturas de clientes que son de Brasil.
+-- with WHERE
 ```sql
 select * from customers as c, invoices as i where i.invoiceid=c.customerid and c.country='Brazil';
 ```
+-- with JOIN
 ```sql
 select * from invoices as i inner join customers as c on i.invoiceid=c.customerid and c.country='Brazil';
 ```
@@ -94,9 +98,11 @@ select * from invoices as i inner join customers as c on i.invoiceid=c.customeri
 | 13        | 16         | 2009-02-19 00:00:00 | 1600 Amphitheatre Parkway | Mountain View | CA           | USA            | 94043-1351        | 0.99  | 13         | Fernanda  | Ramos     |                                                  | Qe 7 Bloco G                    | Brasília            | DF    | Brazil  | 71020-677  | +55 (61) 3363-5547 | +55 (61) 3363-7855 | fernadaramos4@uol.com.br      | 4            |
 
 ### Proporciona una consulta que muestre las facturas asociadas con cada agente de ventas. La tabla resultante debe incluir el nombre completo del Agente de Ventas.
+-- with WHERE
 ```sql
 select i.*, c.firstname || ' ' || c.lastname as EmployeeFullName from customers as c, invoices as i, employees as e where i.invoiceid=c.customerid and c.supportrepid=e.employeeid and e.title='Sales Support Agent';
 ```
+-- with JOIN
 ```sql
 select i.*, e.firstname || ' ' || e.lastname as EmployeeFullName from invoices as i inner join customers as c on i.invoiceid=c.customerid join employees as e on c.supportrepid=e.employeeid and e.title='Sales Support Agent';
 ```
@@ -163,9 +169,11 @@ select i.*, e.firstname || ' ' || e.lastname as EmployeeFullName from invoices a
 | 57        | 11         | 2009-09-06 00:00:00 | Av. Paulista, 2022        | São Paulo      | SP           | Brazil         | 01310-200         | 1.98  | Luis Rojas            |
 
 ### Proporciona una consulta que muestre el Total de la Factura, nombre del cliente, país y nombre del Agente de Ventas para todas las facturas y clientes.
+-- with WHERE
 ```sql
 select i.total, c.firstname as CustomerName, c.country, e.firstname as EmployeeName from customers as c, invoices as i, employees as e where i.invoiceid=c.customerid and c.supportrepid=e.employeeid and e.title='Sales Support Agent';
 ```
+-- with JOIN
 ```sql
 select i.total, c.firstname as CustomerName, c.country, e.firstname as EmployeeName from invoices as i inner join customers as c on i.invoiceid=c.customerid join employees as e on c.supportrepid=e.employeeid and e.title='Sales Support Agent';
 ```
@@ -242,13 +250,91 @@ select substr(invoicedate, 1, 4) as Year, count(invoiceid) as TotalInvoices, sum
 
 ### Mirando la tabla de InvoiceLine, proporciona una consulta que CUENTE el número de ítems de línea para el ID de factura 37.
 ```sql
+select invoiceid, count(invoicelineid) as Items from invoice_items where invoiceid = 37;
 ```
+| InvoiceId | Items |
+|-----------|-------|
+| 37        | 4     |
+
 ### Mirando la tabla de InvoiceLine, proporciona una consulta que CUENTE el número de ítems de línea para cada Factura. PISTA: GROUP BY
 ```sql
+select invoiceid, count(invoicelineid) as Items from invoice_items group by invoiceid;
 ```
+| InvoiceId | Items |
+|-----------|-------|
+| 1         | 2     |
+| 2         | 4     |
+| 3         | 6     |
+| 4         | 9     |
+| 5         | 14    |
+| 6         | 1     |
+| 7         | 2     |
+| 8         | 2     |
+| 9         | 4     |
+| 10        | 6     |
+| 11        | 9     |
+| 12        | 14    |
+| 13        | 1     |
+| 14        | 2     |
+| 15        | 2     |
+| 16        | 4     |
+| 17        | 6     |
+| 18        | 9     |
+| 19        | 14    |
+| 20        | 1     |
+| 21        | 2     |
+| 22        | 2     |
+| 23        | 4     |
+| 24        | 6     |
+| 25        | 9     |
+| 26        | 14    |
+| 27        | 1     |
+| 28        | 2     |
+| 29        | 2     |
+| 30        | 4     |
+-- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
+
 ### Proporciona una consulta que incluya el nombre de la pista con cada ítem de línea de factura.
 ```sql
+select t.name, ii.invoicelineid from tracks as t, invoice_items as ii where ii.trackid=t.trackid;
 ```
+```sql
+select t.name, ii.invoicelineid from tracks as t join invoice_items as ii on ii.trackid = t.trackid;
+```
+|                                                            Name                                                             | InvoiceLineId |
+|-----------------------------------------------------------------------------------------------------------------------------|---------------|
+| For Those About To Rock (We Salute You)                                                                                     | 579           |
+| Balls to the Wall                                                                                                           | 1             |
+| Balls to the Wall                                                                                                           | 1154          |
+| Fast As a Shark                                                                                                             | 1728          |
+| Restless and Wild                                                                                                           | 2             |
+| Princess of the Dawn                                                                                                        | 580           |
+| Put The Finger On You                                                                                                       | 3             |
+| Inject The Venom                                                                                                            | 4             |
+| Inject The Venom                                                                                                            | 1155          |
+| Snowballed                                                                                                                  | 581           |
+| Snowballed                                                                                                                  | 1729          |
+| Evil Walks                                                                                                                  | 5             |
+| Breaking The Rules                                                                                                          | 6             |
+| Night Of The Long Knives                                                                                                    | 582           |
+| Spellbound                                                                                                                  | 1156          |
+| Go Down                                                                                                                     | 1730          |
+| Dog Eat Dog                                                                                                                 | 7             |
+| Problem Child                                                                                                               | 583           |
+| Overdose                                                                                                                    | 8             |
+| Overdose                                                                                                                    | 1157          |
+| Hell Ain't A Bad Place To Be                                                                                                | 1731          |
+| Love In An Elevator                                                                                                         | 9             |
+| Rag Doll                                                                                                                    | 584           |
+| What It Takes                                                                                                               | 1158          |
+| Janie's Got A Gun                                                                                                           | 10            |
+| Amazing                                                                                                                     | 1732          |
+| Blind Man                                                                                                                   | 585           |
+| Deuces Are Wild                                                                                                             | 11            |
+| Deuces Are Wild                                                                                                             | 1159          |
+| Angel                                                                                                                       | 12            |
+-- Estos son algunos de los ejemplos de esta consulta, ya que la tabla es muy larga para ponerla entera
+
 ### Proporciona una consulta que incluya el nombre de la pista comprada Y el nombre del artista con cada ítem de línea de factura.
 ```sql
 ```
