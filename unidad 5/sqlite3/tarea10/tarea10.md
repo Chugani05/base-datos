@@ -4,7 +4,7 @@ Mediante el siguiente comando entramos en sqlite:
 ```sql
 sqlite3 tarea10.db 
 ```
-Por medio del comando dado a continuación realizamos la creacion de la tabla y la inserción de la informacion en la base de datos
+Por medio del comando dado a continuación abrimos la base de datos que se nos proporciona:
 ```sql
 .open chinook.db
 ```
