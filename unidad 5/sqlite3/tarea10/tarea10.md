@@ -10,6 +10,8 @@ Por medio del comando dado a continuación abrimos la base de datos que se nos p
 ```
 
 ## Realización de consultas
+![modelo-er](chinook-er.png)
+
 ### Proporciona una consulta que muestre solo los clientes de Brasil.
 ```sql
 select * from customers where country='Brazil';

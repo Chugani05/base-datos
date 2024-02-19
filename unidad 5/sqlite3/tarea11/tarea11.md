@@ -6,18 +6,48 @@ sqlite3 jardineria.db
 ```
 
 ## Realización de consultas
+![modelo-er](jardineria-er.png)
+
 ### Consultas SQL sobre una tabla
 #### Devuelve un listado con el código de oficina y la ciudad donde hay oficinas.
 ```sql
+select codigo_oficina, ciudad from oficina;
 ```
+| codigo_oficina |        ciudad        |
+|----------------|----------------------|
+| BCN-ES         | Barcelona            |
+| BOS-USA        | Boston               |
+| LON-UK         | Londres              |
+| MAD-ES         | Madrid               |
+| PAR-FR         | Paris                |
+| SFC-USA        | San Francisco        |
+| SYD-AU         | Sydney               |
+| TAL-ES         | Talavera de la Reina |
+| TOK-JP         | Tokyo                |
+
 #### Devuelve un listado con la ciudad y el teléfono de las oficinas de España.
 ```sql
+select ciudad, telefono from oficina where pais='España';
 ```
+|        ciudad        |    telefono    |
+|----------------------|----------------|
+| Barcelona            | +34 93 3561182 |
+| Madrid               | +34 91 7514487 |
+| Talavera de la Reina | +34 925 867231 |
+
 #### Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un código de jefe igual a 7.
 ```sql
+select nombre, apellido1 ||' '|| apellido2 as apellidos, email from empleado where codigo_jefe=7;
 ```
+| nombre  |     apellidos     |          email           |
+|---------|-------------------|--------------------------|
+| Mariano | López Murcia      | mlopez@jardineria.es     |
+| Lucio   | Campoamor Martín  | lcampoamor@jardineria.es |
+| Hilario | Rodriguez Huertas | hrodriguez@jardineria.es |
+
 #### Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa.
 ```sql
+
 ```
 #### Devuelve un listado con el nombre, apellidos y puesto de aquellos empleados que no sean representantes de ventas.
 ```sql
