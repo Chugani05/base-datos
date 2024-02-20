@@ -2,16 +2,16 @@
 create table cliente (
 id integer primary key autoincrement,
 nombre text,
-apelllido1 text,
-apelllido2 text,
+apellido1 text,
+apellido2 text,
 ciudad text,
 categoria integer );
 
 create table comercial (
 id integer primary key autoincrement,
 nombre text,
-apelllido1 text,
-apelllido2 text,
+apellido1 text,
+apellido2 text,
 categoria real );
 
 create table pedido (
@@ -118,55 +118,111 @@ select distinct id_cliente from pedido;
 
 -- 4. Devuelve un listado de todos los pedidos que se realizaron durante el año 2017, cuya cantidad total sea superior a 500€.
 -- Consulta:
-
+select * from pedido where substr(fecha, 1, 4)='2017' and total>'500';
 /**
+┌────┬─────────┬────────────┬────────────┬──────────────┐
+│ id │  total  │   fecha    │ id_cliente │ id_comercial │
+├────┼─────────┼────────────┼────────────┼──────────────┤
+│ 5  │ 948.5   │ 2017-09-10 │ 5          │ 2            │
+│ 8  │ 1983.43 │ 2017-10-10 │ 4          │ 6            │
+│ 12 │ 3045.6  │ 2017-04-25 │ 2          │ 1            │
+└────┴─────────┴────────────┴────────────┴──────────────┘
 **/
 
 -- 5. Devuelve un listado con el nombre y los apellidos de los comerciales que tienen una comisión entre 0.05 y 0.11.
 -- Consulta:
-
+select nombre, apellido1 ||' '|| apellido2 as apellidos from comercial where categoria between 0.05 and 0.11;
 /**
+┌─────────┬────────────────┐
+│ nombre  │   apellidos    │
+├─────────┼────────────────┤
+│ Diego   │ Flores Salas   │
+│ Antonio │ Vega Hernández │
+│ Alfredo │ Ruiz Flores    │
+└─────────┴────────────────┘
 **/
 
 -- 6. Devuelve el valor de la comisión de mayor valor que existe en la tabla comercial.
 -- Consulta:
-
+select max(categoria) as max_comision from comercial;
 /**
+┌──────────────┐
+│ max_comision │
+├──────────────┤
+│ 0.15         │
+└──────────────┘
 **/
 
-- Devuelve el identificador, nombre y primer apellido de aquellos clientes cuyo segundo apellido no es NULL. El listado deberá estar ordenado alfabéticamente por apellidos y nombre.
+-- 7. Devuelve el identificador, nombre y primer apellido de aquellos clientes cuyo segundo apellido no es NULL. El listado deberá estar ordenado alfabéticamente por apellidos y nombre.
 -- Consulta:
-
+select id, nombre, apellido1 from cliente where apellido2 not null order by apellido1, nombre;
 /**
+┌────┬───────────┬───────────┐
+│ id │  nombre   │ apellido1 │
+├────┼───────────┼───────────┤
+│ 5  │ Marcos    │ Loyola    │
+│ 9  │ Guillermo │ López     │
+│ 1  │ Aarón     │ Rivero    │
+│ 3  │ Adolfo    │ Rubio     │
+│ 8  │ Pepe      │ Ruiz      │
+│ 2  │ Adela     │ Salas     │
+│ 10 │ Daniel    │ Santana   │
+│ 6  │ María     │ Santana   │
+└────┴───────────┴───────────┘
 **/
 
-- Devuelve un listado de los nombres de los clientes que empiezan por A y terminan por n y también los nombres que empiezan por P. El listado deberá estar ordenado alfabéticamente.
+-- 8. Devuelve un listado de los nombres de los clientes que empiezan por A y terminan por n y también los nombres que empiezan por P. El listado deberá estar ordenado alfabéticamente.
 -- Consulta:
-
+select nombre from cliente where nombre regexp '^A.*n$' or nombre regexp '^P' order by nombre;
 /**
+┌────────┐
+│ nombre │
+├────────┤
+│ Aarón  │
+│ Adrián │
+│ Pepe   │
+│ Pilar  │
+└────────┘
 **/
-- Devuelve un listado de los nombres de los clientes que no empiezan por A. El listado deberá estar ordenado alfabéticamente.
+-- 9. Devuelve un listado de los nombres de los clientes que no empiezan por A. El listado deberá estar ordenado alfabéticamente.
 -- Consulta:
-
+select nombre from cliente where nombre not regexp '^A'order by nombre;
 /**
+┌───────────┐
+│  nombre   │
+├───────────┤
+│ Daniel    │
+│ Guillermo │
+│ Marcos    │
+│ María     │
+│ Pepe      │
+│ Pilar     │
+└───────────┘
 **/
 
--- Devuelve un listado con los nombres de los comerciales que terminan por el o o. Tenga en cuenta que se deberán eliminar los nombres repetidos.
+-- 10. Devuelve un listado con los nombres de los comerciales que terminan por la o. Tenga en cuenta que se deberán eliminar los nombres repetidos.
 -- Consulta:
-
+select distinct nombre from comercial where nombre regexp 'o$';
 /**
+┌─────────┐
+│ nombre  │
+├─────────┤
+│ Diego   │
+│ Antonio │
+│ Alfredo │
+└─────────┘
 **/
 
 
-## Consultas multitabla
+-- Consultas multitabla
 -- Nota: Resuelva todas las consultas utilizando las cláusulas INNER JOIN.
-- Devuelve un listado con el identificador, nombre y los apellidos de todos los clientes que han realizado algún pedido. El listado debe estar ordenado alfabéticamente y se deben eliminar los elementos repetidos.
+-- 1. Devuelve un listado con el identificador, nombre y los apellidos de todos los clientes que han realizado algún pedido. El listado debe estar ordenado alfabéticamente y se deben eliminar los elementos repetidos.
 -- Consulta:
 
 /**
 **/
 
-- Devuelve un listado que muestre todos los pedidos que ha realizado cada cliente. El resultado debe mostrar todos los datos de los pedidos y del cliente. El listado debe mostrar los datos de los clientes ordenados alfabéticamente.
+-- 2. Devuelve un listado que muestre todos los pedidos que ha realizado cada cliente. El resultado debe mostrar todos los datos de los pedidos y del cliente. El listado debe mostrar los datos de los clientes ordenados alfabéticamente.
 -- Consulta:
 
 /**
@@ -299,19 +355,31 @@ select distinct id_cliente from pedido;
 -- Con operadores básicos de comparación
 -- 1. Devuelve un listado con todos los pedidos que ha realizado Adela Salas Díaz. (Sin utilizar INNER JOIN).
 -- Consulta:
-
+select p.* from cliente as c, pedido as p where c.id=p.id_cliente and c.nombre='Adela' and apellido1='Salas' and apellido2='Díaz';
 /**
+┌────┬────────┬────────────┬────────────┬──────────────┐
+│ id │ total  │   fecha    │ id_cliente │ id_comercial │
+├────┼────────┼────────────┼────────────┼──────────────┤
+│ 3  │ 65.26  │ 2017-10-05 │ 2          │ 1            │
+│ 7  │ 5760.0 │ 2015-09-10 │ 2          │ 1            │
+│ 12 │ 3045.6 │ 2017-04-25 │ 2          │ 1            │
+└────┴────────┴────────────┴────────────┴──────────────┘
 **/
 
 -- 2. Devuelve el número de pedidos en los que ha participado el comercial Daniel Sáez Vega. (Sin utilizar INNER JOIN)
 -- Consulta:
-
+select count(p.id) as pedidos_participados from comercial as c, pedido as p where c.id=p.id_comercial and c.id='1';
 /**
+┌──────────────────────┐
+│ pedidos_participados │
+├──────────────────────┤
+│ 6                    │
+└──────────────────────┘
 **/
 
 -- 3. Devuelve los datos del cliente que realizó el pedido más caro en el año 2019. (Sin utilizar INNER JOIN)
 -- Consulta:
-
+select c.* from cliente as c, pedido as p where c.id=p.id_cliente and substr(fecha, 1, 4)='2019';  --nooo
 /**
 **/
 
@@ -331,26 +399,50 @@ select distinct id_cliente from pedido;
 -- Subconsultas con IN y NOT IN
 -- 1. Devuelve un listado de los clientes que no han realizado ningún pedido. (Utilizando IN o NOT IN).
 -- Consulta:
-
+select * from cliente where id not in (select id_cliente from pedido);
 /**
+┌────┬───────────┬───────────┬───────────┬─────────┬───────────┐
+│ id │  nombre   │ apellido1 │ apellido2 │ ciudad  │ categoria │
+├────┼───────────┼───────────┼───────────┼─────────┼───────────┤
+│ 9  │ Guillermo │ López     │ Gómez     │ Granada │ 225       │
+│ 10 │ Daniel    │ Santana   │ Loyola    │ Sevilla │ 125       │
+└────┴───────────┴───────────┴───────────┴─────────┴───────────┘
 **/
 
 -- 2. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando IN o NOT IN).
 -- Consulta:
-
+select * from comercial where id not in (select id_comercial from pedido );
 /**
+┌────┬─────────┬───────────┬───────────┬───────────┐
+│ id │ nombre  │ apellido1 │ apellido2 │ categoria │
+├────┼─────────┼───────────┼───────────┼───────────┤
+│ 4  │ Marta   │ Herrera   │ Gil       │ 0.14      │
+│ 8  │ Alfredo │ Ruiz      │ Flores    │ 0.05      │
+└────┴─────────┴───────────┴───────────┴───────────┘
 **/
 
 
 -- Subconsultas con EXISTS y NOT EXISTS
 -- 1. Devuelve un listado de los clientes que no han realizado ningún pedido. (Utilizando EXISTS o NOT EXISTS).
 -- Consulta:
-
+select * from cliente where not exists (select 1 from pedido where cliente.id=pedido.id_cliente);
 /**
+┌────┬───────────┬───────────┬───────────┬─────────┬───────────┐
+│ id │  nombre   │ apellido1 │ apellido2 │ ciudad  │ categoria │
+├────┼───────────┼───────────┼───────────┼─────────┼───────────┤
+│ 9  │ Guillermo │ López     │ Gómez     │ Granada │ 225       │
+│ 10 │ Daniel    │ Santana   │ Loyola    │ Sevilla │ 125       │
+└────┴───────────┴───────────┴───────────┴─────────┴───────────┘
 **/
 
 -- 2. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando EXISTS o NOT EXISTS).
 -- Consulta:
-
+select * from comercial where not exists (select 1 from pedido where comercial.id=pedido.id_comercial);
 /**
+┌────┬─────────┬───────────┬───────────┬───────────┐
+│ id │ nombre  │ apellido1 │ apellido2 │ categoria │
+├────┼─────────┼───────────┼───────────┼───────────┤
+│ 4  │ Marta   │ Herrera   │ Gil       │ 0.14      │
+│ 8  │ Alfredo │ Ruiz      │ Flores    │ 0.05      │
+└────┴─────────┴───────────┴───────────┴───────────┘
 **/
