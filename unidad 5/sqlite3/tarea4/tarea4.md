@@ -61,7 +61,7 @@ sqlite3 tarea4.db
 ```
 Por medio del comando dado a continuación realizamos la creacion de la tabla y la inserción de la informacion en la base de datos
 ```sql
-.read supermercado-dump.sql.
+.read supermercado-dump.sql
 ```
 ## Respondiendo preguntas
 ### Realiza el diagrama ER de la BBDD supermercado.

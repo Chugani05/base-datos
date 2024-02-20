@@ -203,6 +203,7 @@ select codigo_pedido, codigo_cliente, fecha_esperada, fecha_entrega from pedido 
 
 - Devuelve un listado de todos los pedidos que fueron rechazados en 2009.
 ```sql
+
 ```
 - Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año.
 ```sql
