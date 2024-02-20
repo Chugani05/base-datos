@@ -657,7 +657,7 @@ select * from clientes where nombre REGEXP '[aiueoAIUEO]*[aiueoAIUEO]*[aiueoAIUE
 
 ### Obtener los productos cuyo precio tenga al menos 4 números sin contrar los decimales.
 ```sql
-select * from productos where precio REGEXP '^[0-9]{4,}\.';
+select * from productos where precio regexp '^[0-9]{4,}\.';
 ```
 | id | nombre | precio |
 |----|--------|--------|
