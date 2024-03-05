@@ -11,13 +11,41 @@ sqlite3 universidad.db
 ### Consultas de una única tabla
 - Devuelve un listado con el primer apellido, segundo apellido y el nombre de todos los alumnos. El listado deberá estar ordenado alfabéticamente de menor a mayor por el primer apellido, segundo apellido y nombre.
 ```sql
+select apellido1, apellido2, nombre from persona where tipo='alumno' order by apellido1 asc, apellido2 asc, nombre asc;
 ```
+| apellido1 | apellido2 |  nombre  |
+|-----------|-----------|----------|
+| Domínguez | Guerrero  | Antonio  |
+| Gea       | Ruiz      | Sonia    |
+| Gutiérrez | López     | Juan     |
+| Heller    | Pagac     | Pedro    |
+| Herman    | Pacocha   | Daniel   |
+| Hernández | Martínez  | Irene    |
+| Herzog    | Tremblay  | Ramón    |
+| Koss      | Bayer     | José     |
+| Lakin     | Yundt     | Inma     |
+| Saez      | Vega      | Juan     |
+| Strosin   | Turcotte  | Ismael   |
+| Sánchez   | Pérez     | Salvador |
+
 - Averigua el nombre y los dos apellidos de los alumnos que no han dado de alta su número de teléfono en la base de datos.
 ```sql
+select distinct nombre, apellido1 ||' '|| apellido2 as apellidos from persona where tipo = 'alumno' and telefono is null;
 ```
+| nombre |    apellidos     |
+|--------|------------------|
+| Pedro  | Heller Pagac     |
+| Ismael | Strosin Turcotte |
+
 - Devuelve el listado de los alumnos que nacieron en 1999.
 ```sql
+select * from persona where tipo='alumno' and fecha_nacimiento regexp '^1999/';
 ```
+| id |    nif    | nombre  | apellido1 | apellido2 | ciudad  |    direccion    | telefono  | fecha_nacimiento | sexo |  tipo  |
+|----|-----------|---------|-----------|-----------|---------|-----------------|-----------|------------------|------|--------|
+| 7  | 97258166K | Ismael  | Strosin   | Turcotte  | Almería | C/ Neptuno      |           | 1999/05/24       | H    | alumno |
+| 22 | 41491230N | Antonio | Domínguez | Guerrero  | Almería | C/ Cabo de Gata | 626652498 | 1999/02/11       | H    | alumno |
+
 - Devuelve el listado de profesores que no han dado de alta su número de teléfono en la base de datos y además su nif termina en K.
 ```sql
 ```
@@ -112,4 +140,5 @@ sqlite3 universidad.db
 ```
 - Devuelve un listado con todos los departamentos que no han impartido asignaturas en ningún curso escolar.
 ```sql
+select distinct(id-departamento) from profesor where id-profesor in (select distinct(id-profesor from asignatura));
 ```
