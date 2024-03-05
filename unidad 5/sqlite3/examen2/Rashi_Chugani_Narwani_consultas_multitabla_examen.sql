@@ -55,6 +55,8 @@ select distinct(id_consumidor) from compra;
 -- 4. Devuelve un listado de todos las compras que se realizaron durante el año 2020,
 -- cuya cantidad total sea superior a 500€.
 select * from compra where substr(fecha, 1, 4)='2020' and total > 500;
+select * from compra as c where total > 500 and c.fecha subfstr('%Y, c.fecha') as anio and anio = 2020; --otra forma
+select * from compra as c where total > 500 and c.fecha regexp ('^2020'); --otra forma
 ┌────┬─────────┬────────────┬───────────────┬──────────────────┐
 │ id │  total  │   fecha    │ id_consumidor │ id_suministrador │
 ├────┼─────────┼────────────┼───────────────┼──────────────────┤
@@ -437,13 +439,11 @@ select cm.* from compra as cm, consumidor as cn where id_consumidor = (select id
 └────┴────────┴────────────┴───────────────┴──────────────────┘
 
 -- 2. Devuelve la fecha y la cantidad del compra de menor valor realizado por el cliente Pepe Ruiz Santana.
-select fecha, total from compra as cm, consumidor as cn where id_consumidor = (select id from consumidor where nombre='Pepe' and apellido1='Ruiz' and apellido2='Santana');
+select fecha, min(total) from compra as cm, consumidor as cn where id_consumidor = (select id from consumidor where nombre='Pepe' and apellido1='Ruiz' and apellido2='Santana'); --no estaba del todo bien, me falto el min()
 ┌────────────┬────────┐
 │   fecha    │ total  │
 ├────────────┼────────┤
 │ 2019-08-17 │ 110.5  │
-│ 2018-06-27 │ 250.45 │
-│ 2019-10-10 │ 2480.4 │
 └────────────┴────────┘
 
 -- 3. Devuelve el número de compras en los que ha participado el suministrador Daniel Sáez Vega. (Sin utilizar INNER JOIN)
@@ -468,5 +468,16 @@ select * from consumidor where id not in (select id_consumidor from compra);
 └────┴───────────┴───────────┴───────────┴─────────┴───────────┘
 
 -- 7. Devuelve un listado de los suministradores que no han realizado ningún compra. (Utilizando IN o NOT IN).
+select * from suministrador as s where id not in (select distinct(id_suministrador) from compra as c);  --no estaba hecha
+
 -- 8. Devuelve un listado de los consumidores que no han realizado ningún compra. (Utilizando EXISTS o NOT EXISTS).
+select * from consumidor as s where not exists (select id_suministrador from compra as c where c.id_consumidor=s.id);  --no estaba hecha
+┌────┬───────────┬───────────┬───────────┬─────────┬───────────┐
+│ id │  nombre   │ apellido1 │ apellido2 │ ciudad  │ categoria │
+├────┼───────────┼───────────┼───────────┼─────────┼───────────┤
+│ 9  │ Guillermo │ López     │ Gómez     │ Granada │ 225       │
+│ 10 │ Daniel    │ Santana   │ Loyola    │ Sevilla │ 125       │
+└────┴───────────┴───────────┴───────────┴─────────┴───────────┘
+
 -- 9. Devuelve un listado de los suministradores que no han realizado ningún compra. (Utilizando EXISTS o NOT EXISTS).
+select * from suministrador as s where not exists (select id_suministrador from compra as c where c.id_suministrador=s.id);  --no estaba hecha
