@@ -1,3 +1,4 @@
+-- TAREA 1
 -- MIGRACIÓN Y PRIMEROS PASOS EN MYSQL
 -- Migramos la BBDD dada en sqlite3 a MySQL:
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -95,9 +96,41 @@ select * from usuarios where edad > 25;
 **/
 
 -- Mostrar los productos con un precio mayor a 50.
+select * from productos where precio > 50;
+/**
++----+---------+--------+----------+
+| id | nombre  | precio | cantidad |
++----+---------+--------+----------+
+|  3 | Zapatos |  59.99 |       50 |
++----+---------+--------+----------+
+**/
+
 -- Mostrar los pedidos realizados el día de hoy.
+select * from pedidos 
+/**
+
+**/
+
 -- Mostrar el total de productos en stock.
+select sum(precio) from productos;
+/**
++-------------+
+| sum(precio) |
++-------------+
+|      121.48 |
++-------------+
+**/
+
 -- Mostrar el promedio de edades de los usuarios.
+select avg(edad) from usuarios;
+/**
++-----------+
+| avg(edad) |
++-----------+
+|   27.6667 |
++-----------+
+**/
+
 -- Mostrar los usuarios que tienen la letra 'a' en su nombre
 -- Mostrar los productos ordenados por precio de forma descendente.
 -- Mostrar los pedidos realizados por el usuario con ID 2.
