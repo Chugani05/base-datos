@@ -2,9 +2,9 @@
 -- MIGRACIÓN Y PRIMEROS PASOS EN MYSQL
 -- Migramos la BBDD dada en sqlite3 a MySQL:
 CREATE TABLE IF NOT EXISTS clientes (
-    id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT,
-    direccion TEXT
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    direccion VARCHAR(50)
 );
 
 INSERT INTO clientes (nombre, direccion) VALUES
@@ -30,8 +30,8 @@ INSERT INTO clientes (nombre, direccion) VALUES
     ('Cliente 20', 'Dirección 20');
 
 CREATE TABLE IF NOT EXISTS productos (
-    id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT,
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
     precio FLOAT
 );
 
@@ -58,10 +58,10 @@ INSERT INTO productos (nombre, precio) VALUES
     ('Producto 20', 200.50);
 
 CREATE TABLE IF NOT EXISTS ordenes (
-    id_orden INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_cliente INTEGER,
-    id_producto INTEGER,
-    cantidad INTEGER,
+    id_orden INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT,
+    id_producto INT,
+    cantidad INT,
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
