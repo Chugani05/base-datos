@@ -24,7 +24,7 @@ CREATE TABLE clientes (
     telefono varchar(11)
 );
 /** Query OK, 0 rows affected (0,14 sec) **/
-ALTER TABLE clientes MODIFY documento, ADD PRIMARY KEY(documento);
+ALTER TABLE clientes ADD PRIMARY KEY(documento);
 /** Query OK, 0 rows affected (0,46 sec)
 Records: 0  Duplicates: 0  Warnings: 0 **/
 
