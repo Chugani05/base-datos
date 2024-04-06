@@ -115,21 +115,22 @@ SHOW INDEXES from MOVIMIENTO_BIS;
 /** Consulta1: **/ select * from MOVIMIENTO where identificador=3;
 /** Consulta 2 **/ select identificador from MOVIMIENTO_BIS where identificador=3;
 -- Fíjata en que en la consulta 1 pedimos todos los campos. ¿A través de que indice se busca? ¿Por qué crees que lo hace así? En la consulta 2 solo pedimos el identificador. ¿A través de que índice busca? ¿Por qué crees que lo hace así? Analiza la ejecución.
-/** En la consulta 1, está buscando através de la 'PRIMARY' que es el identificador. Lo hace así porque 
-En la consulta 2, está buscando através de la 'IX_IDENTIFICADOR' que es el identificador. Lo hace así porque **/
+/** En la consulta 1, el motor de base de datos está buscando a través del índice PRIMARY, que generalmente es el índice principal de la tabla y generalmente está asociado con la clave primaria de la tabla. Dado que estamos filtrando por el campo identificador, que podría ser parte de la clave primaria, el motor de base de datos opta por usar este índice para la búsqueda, ya que es eficiente para buscar valores únicos.
+En la consulta 2, el motor de base de datos está buscando a través del índice IX_IDENTIFICADOR, que probablemente es un índice secundario creado específicamente en la columna identificador. Esto se hace para optimizar las consultas que filtran por este campo. El motor de base de datos utiliza este índice porque está diseñado para permitir búsquedas eficientes basadas en el campo identificador, que es precisamente lo que estamos haciendo en la consulta. **/
 
 -- 10. Analiza el plan de ejecución de las siguientes consultas y observa la diferencia:
 /** Consulta 1: **/ SELECT fecha FROM MOVIMIENTO WHERE fecha BETWEEN ‘01/01/2012’ and ‘01/03/2012’;
-/** Consulta 2 **/ SELECT * FROM MOVIMIENTO_BIS WHERE fecha BETWEEN ‘01/01/2012’ and ‘01/03/2012’;
+/** Consulta 2: **/ SELECT * FROM MOVIMIENTO_BIS WHERE fecha BETWEEN ‘01/01/2012’ and ‘01/03/2012’;
 -- Fijate que en la consulta 2 pedimos todos los campos. ¿A través de que índice busca? ¿Por qué crees que lo hace así? En la consulta 1 solo pedimos la fecha. ¿A través de que índice busca? ¿Por qué crees que lo hace así? Analiza la ejecución.
-/**  **/
+/** En la consulta 1, el motor de base de datos realizará un escaneo completo de la tabla para encontrar las filas dentro del rango de fechas especificado.
+En la consulta 2, el motor de base de datos utilizará el índice 'IX_FECHA_BIS' para buscar eficientemente las filas dentro del rango especificado, lo que debería ser más eficiente que un escaneo completo de la tabla. **/
 
--- Vamos a crear un índice por fecha (IX_FECHA) en la tabla MOVIMIENTO, puesto que no lo tenía, en este caso la tabla ya tenía un indice, la clave primaria.
+-- 11. Vamos a crear un índice por fecha (IX_FECHA) en la tabla MOVIMIENTO, puesto que no lo tenía, en este caso la tabla ya tenía un indice, la clave primaria.
 CREATE INDEX IX_FECHA ON MOVIMIENTO(Fecha);
 /** Query OK, 0 rows affected (0,20 sec)
 Records: 0  Duplicates: 0  Warnings: 0 **/
 
--- Visualiza los indices de las tablas MOVIMIENTO y MOVIMIENTO_BIS.
+-- 12. Visualiza los indices de las tablas MOVIMIENTO y MOVIMIENTO_BIS.
 SHOW INDEXES FROM MOVIMIENTO;
 /**
 +------------+------------+----------+--------------+---------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
@@ -149,9 +150,12 @@ SHOW INDEXES FROM MOVIMIENTO_BIS;
 +----------------+------------+------------------+--------------+---------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
 **/
 
--- Analiza el plan de ejecución de las siguientes consultas y observa la diferencia:
+-- 13. Analiza el plan de ejecución de las siguientes consultas y observa la diferencia:
 /** Consulta 1: **/ SELECT fecha FROM MOVIMIENTO WHERE fecha BETWEEN ‘01/01/2012’ AND ‘01/03/2012’;
 /** Consulta 2: **/ SELECT * FROM MOVIMIENTO WHERE fecha BETWEEN ‘01/01/2012’ AND ‘01/03/2012’;
 /** Consulta 3: **/ SELECT fecha FROM MOVIMIENTO_BIS WHERE fecha BETWEEN ‘01/01/2012’ AND ‘01/03/2012’;
 /** Consulta 4: **/ SELECT * FROM MOVIMIENTO_BIS WHERE fecha BETWEEN ‘01/01/2012’ AND ‘01/03/2012’;
-/**  **/
+/** Consulta 1: selecciona solo la columna fecha, utilizará el índice en fecha para buscar eficientemente dentro del rango especificado.
+Consulta 2: selecciona todas las columnas, opta por realizar un escaneo completo de la tabla debido a la selección de todas las columnas.
+Consulta 3: selecciona solo la columna fecha, utilizará el índice en fecha para buscar eficientemente dentro del rango especificado.
+Consulta 4: selecciona todas las columnas, opta por realizar un escaneo completo de la tabla debido a la selección de todas las columnas. **/
