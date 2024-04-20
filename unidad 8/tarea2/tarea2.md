@@ -6,9 +6,8 @@ Relizamos la carga de datos creando un archivo sql con los datos de la base de d
 ```sql
 show databases;
 ```
-+--------------------+
 | Database           |
-+--------------------+
+|--------------------|
 | Base_Indices       |
 | SimpleDB           |
 | information_schema |
@@ -23,7 +22,6 @@ show databases;
 | tarea71            |
 | tarea72            |
 | tarea7_4           |
-+--------------------+
 
 ## Se pide realizar los procedimientos y funciones:
 ### Realice los siguientes procedimientos y funciones sobre la base de datos jardineria.
