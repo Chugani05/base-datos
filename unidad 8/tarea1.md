@@ -1,4 +1,5 @@
 # Tarea 1
+# Tarea Procedimientos
 
 <div align="center">
 <img src="https://danielme.com/wp-content/uploads/2023/08/image-16.png" width="300">
@@ -70,10 +71,12 @@ BEGIN
 END //
 DELIMITER ;
 ```
+
 Añadimos un nuevo usuario mediante:
 ```sql
 call Create_User('Rashi', 'rashi@example.com');
 ```
+
 Hacemos la llamada mediante:
 ```sql
 select * from Users;
@@ -99,10 +102,12 @@ BEGIN
 END //
 DELIMITER ;
 ```
+
 Cambiamos el nombre y el email de uno de los usuarios mediante:
 ```sql
 call Modify_User(4, 'Inés', 'ines@example.com');
 ```
+
 Hacemos la llamada mediante:
 ```sql
 select * from Users;
@@ -132,6 +137,7 @@ BEGIN
 END //
 DELIMITER ;
 ```
+
 Comprobamos que la funcion funcione mediante:
 ```sql
 select Get_Total_Price();
@@ -162,6 +168,7 @@ BEGIN
 END //
 DELIMITER ;
 ```
+
 Comprobamos que la funcion funcione mediante:
 ```sql
 select User_Counter();
