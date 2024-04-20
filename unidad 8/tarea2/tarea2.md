@@ -100,11 +100,9 @@ Comprobamos que la funcion funcione mediante:
 ```sql
 select calcular_suma_pagos_cliente(7);
 ```
-+--------------------------------+
 | calcular_suma_pagos_cliente(7) |
-+--------------------------------+
+|--------------------------------|
 |                         197940 |
-+--------------------------------+
 
 
 - Procedimiento __calcular_pagos_pendientes__
