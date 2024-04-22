@@ -44,11 +44,12 @@ DELIMITER ;
 
 Comprobamos que la funcion funcione mediante:
 ```sql
-select calcular_precio_total_pedido(5);
+select calcular_precio_total_pedido(13);
 ```
-| calcular_precio_total_pedido(4) |
-|---------------------------------|
-|                            2624 |
+| calcular_precio_total_pedido(13) |
+|----------------------------------|
+|                              738 |
+
 
 
 
@@ -64,7 +65,7 @@ CREATE FUNCTION calcular_suma_pedidos_cliente(codigo_cliente int)
 RETURNS float deterministic
 BEGIN
     DECLARE suma_total float;
-    SELECT SUM(codigo_pedido) FROM pedido INTO suma_total;
+    SELECT COUNT(codigo_cliente) FROM pedido AS p WHERE p.codigo_cliente = codigo_cliente INTO suma_total;
     RETURN suma_total;
 END//
 DELIMITER ;
@@ -72,11 +73,12 @@ DELIMITER ;
 
 Comprobamos que la funcion funcione mediante:
 ```sql
-select calcular_suma_pedidos_cliente(4);
+select calcular_suma_pedidos_cliente(19);
 ```
-| calcular_suma_pedidos_cliente(4) |
-|----------------------------------|
-|                             7453 |
+| calcular_suma_pedidos_cliente(19) |
+|-----------------------------------|
+|                                 5 |
+
 
 
 - Función __calcular_suma_pagos_cliente__
