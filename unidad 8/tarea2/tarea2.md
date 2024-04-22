@@ -36,7 +36,7 @@ CREATE FUNCTION calcular_precio_total_pedido(codigo_pedido int)
 RETURNS float deterministic
 BEGIN
     DECLARE precio_total float;
-    SELECT SUM(precio_unidad * cantidad) FROM detalle_pedido INTO precio_total;
+    SELECT SUM(precio_unidad * cantidad) FROM detalle_pedido AS d WHERE d.codigo_pedido = codigo_pedido INTO precio_total;
     RETURN precio_total;
 END //
 DELIMITER ;
@@ -48,7 +48,7 @@ select calcular_precio_total_pedido(5);
 ```
 | calcular_precio_total_pedido(5) |
 |---------------------------------|
-|                          217738 |
+|                            NULL |
 
 
 
