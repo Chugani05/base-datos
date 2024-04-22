@@ -46,9 +46,9 @@ Comprobamos que la funcion funcione mediante:
 ```sql
 select calcular_precio_total_pedido(5);
 ```
-| calcular_precio_total_pedido(5) |
+| calcular_precio_total_pedido(4) |
 |---------------------------------|
-|                            NULL |
+|                            2624 |
 
 
 
@@ -90,7 +90,7 @@ CREATE FUNCTION calcular_suma_pagos_cliente(codigo_cliente INT)
 RETURNS float deterministic
 BEGIN
     DECLARE suma_total float;
-    SELECT SUM(total) FROM pago INTO suma_total;
+    SELECT SUM(total) FROM pago AS p WHERE p.codigo_cliente = codigo_cliente INTO suma_total;
     RETURN suma_total;
 END//
 DELIMITER ;
@@ -102,7 +102,7 @@ select calcular_suma_pagos_cliente(7);
 ```
 | calcular_suma_pagos_cliente(7) |
 |--------------------------------|
-|                         197940 |
+|                           2390 |
 
 
 - Procedimiento __calcular_pagos_pendientes__
