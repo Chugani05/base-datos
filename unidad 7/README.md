@@ -1,9 +1,10 @@
-# Índice 
+# Unidad 7 - Optimización de las bases de datos
+## Índice 
 1. [Optimización de Base de Datos](#optimización-de-base-de-datos)
 2. [Índices en MySQL](#índices-en-mysql)
 3. [Vistas](#vistas-en-mysql)
 
-# Optimización de Base de Datos
+## Optimización de Base de Datos
 1. **Índices:** Los índices son estructuras que mejoran la velocidad de recuperación de datos al actuar como guías para el motor de la base de datos. Se deben utilizar en columnas que se utilizan frecuentemente en operaciones de búsqueda, clasificación y unión para mejorar la eficiencia de las consultas.
 
 2. **Diseño de la Base de Datos:** Un diseño eficiente de la base de datos implica la normalización adecuada para reducir la redundancia de datos y mejorar la integridad. Sin embargo, se debe evitar el exceso de normalización, ya que puede complicar las consultas y ralentizar el rendimiento.
@@ -25,7 +26,7 @@
 10. **Monitorización y Ajuste Continuo:** Utilizar herramientas de monitorización para supervisar el rendimiento y la salud de la base de datos y realizar ajustes continuos según los cambios en la carga de trabajo y los patrones de acceso a los datos es clave para mantener un rendimiento óptimo a lo largo del tiempo.
 
 
-# Índices en MySQL
+## Índices en MySQL
 Un índice en una base de datos es esencialmente un mecanismo de optimización que acelera la recuperación de datos al actuar como un punto de acceso rápido a las filas de una tabla. Funciona como un puntero que apunta a una fila específica en la tabla, asociando los valores de una o más columnas con esas filas.
 
 Al crear un índice, estás proporcionando a la base de datos una forma más eficiente de encontrar datos cuando se realizan consultas. En lugar de buscar a través de todas las filas de una tabla, la base de datos puede utilizar el índice para localizar rápidamente las filas que coinciden con ciertos criterios de búsqueda. Esto mejora significativamente el tiempo de respuesta de las consultas, especialmente en tablas grandes.
@@ -41,7 +42,7 @@ En general, MySQL utiliza índices para varias acciones:
 3. **Optimizar consultas con ordenamiento (ORDER BY) o agrupamiento (GROUP BY):** Si todas las columnas utilizadas en las cláusulas ORDER BY o GROUP BY forman parte de un índice, MySQL puede aprovechar ese índice para ordenar o agrupar los datos de manera más eficiente.
 4. **Consulta sobre una columna indexada:** Cuando una consulta implica una condición simple y la columna de esa condición está indexada, MySQL puede recuperar las filas directamente del índice, sin necesidad de acceder a la tabla principal. Esto puede resultar en un tiempo de respuesta más rápido para ciertos tipos de consultas.
 
-## Tipos
+### Tipos
 Cuando creamos un índice en MySQL, generalmente lo hacemos con el objetivo de mejorar la velocidad de las consultas futuras sobre los datos existentes en nuestras tablas. Cada motor de base de datos ofrece diferentes tipos de índices, pero en MySQL, hay cinco tipos comunes:
 
 1. **INDEX (NON-UNIQUE):** Este tipo de índice es el más básico y común. No impone restricciones de unicidad en las columnas indexadas, lo que significa que puede haber valores duplicados en esas columnas. Se utiliza principalmente para mejorar el rendimiento de consultas sin preocuparse por la unicidad de los valores.
@@ -56,7 +57,7 @@ Cuando creamos un índice en MySQL, generalmente lo hacemos con el objetivo de m
 
 Es importante tener en cuenta que todos estos tipos de índices pueden estar compuestos por una o más columnas. Además, el orden de las columnas especificadas al crear el índice es relevante para todos los tipos de índices, excepto para FULLTEXT, que indexa todas las columnas especificadas sin importar el orden.
 
-## Sintaxis 
+### Sintaxis 
 
 La sintaxis básica extraída de su web oficial:
 
@@ -97,13 +98,13 @@ Veamos ahora la creación de cada uno de los tipos de índices que nos permiten 
 
 Podemos seguir __dos caminos__ para la creación de índices. __Uno__ en el momento de creación de la tabla, o __dos__, detectando una necesidad, se incluye un índice.
 
-#### Creación de la tabla
+##### Creación de la tabla
 
 ```sql
 CREATE TABLE nombreTabla(campo1 tipoDato, campo2 tipoDato,..
   INDEX [nombreIndice] (campo1 [,campo2...]));
 ```
-#### Modificación de la tabla
+##### Modificación de la tabla
 
 ```sql
 ALTER TABLE nombreTabla ADD INDEX [nombreIndice] (campo1 [,campo2...]);
@@ -135,7 +136,7 @@ O bien, con una sentencia __CREATE INDEX__:
 CREATE INDEX idx_apellidos ON usuarios(apellidos);
 ````
 
-### Índice Unique
+#### Índice Unique
 
 Los índices únicos son básicamente como los índices ordinarios, excepto que los valores duplicados no son permitidos. 
 
@@ -190,7 +191,7 @@ mysql> DESCRIBE usuarios;
 
 > ___Nota___: _Compara el resultado con el valor obtenido en la definición de la tabla de la BBDD_.
 
-### Índices de texto completo
+#### Índices de texto completo
 
 Los índices de texto completo son del tipo ___FULLTEXT__, y pueden contener uno o más campos del tipo __CHAR, VARCHAR y TEXT__. _Un índice de texto completo está diseñado para facilitar y optimizar la búsqueda de palabras clave en tablas que tienen grandes cantidades de información en campos de texto_.
 
@@ -210,7 +211,7 @@ CREATE FULLTEXT INDEX idx_apellidos ON usuarios(apellidos);
 CREATE FULLTEXT INDEX idx_nombre_apellidos ON usuarios(nombre,apellidos);
 ```
 
-### Índices compuestos
+#### Índices compuestos
 
 Los índices compuestos son simplemente aquellos que ___están basados en múltiples columnas___. MySQL únicamente usa un índice por tabla cuando está procesando una consulta. Esto significa que si tenemos varias columnas que frecuentemente aparecen juntas en una cláusula WHERE, tenemos la oportunidad de acelerar estas consultas al crear un índice compuesto.
 
@@ -226,7 +227,7 @@ podemos crear el siguiente indice:
 ALTER TABLE usuarios ADD INDEX idx_nombre(nombre, apellidos);
 ```
 
-### Índices de parte de campos
+#### Índices de parte de campos
 
 En las columnas __CHAR__ y __VARCHAR__ se nos permite crear un índice que no use el campo por completo. Retomemos el ejemplo anterior de la tabla usuarios. A pesar de que el nombre de una persona puede ser de hasta __50 caracteres__, es muy común que los nombres de las personas sean diferentes en los primeros __10 caracteres__. Al usar un índice de 10 caracteres en lugar de 50, el índice será más pequeño, y permitirá que las consultas __INSERT__ y __UPDATE__ sean más rápidas, a la vez que no se afecta la velocidad de las consultas __SELECT__.
 
@@ -242,7 +243,7 @@ Para crear un índice como parte de un campo, sólo se tiene que especificar el 
 ALTER TABLE usuarios ADD INDEX idx_nombre(nombre(10), apellidos(20));;
 ```
 
-## Operaciones sobre índices
+### Operaciones sobre índices
 
 | Operación                   | Sintaxis                                                              | Descripción                                                   |
 |-----------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------|
@@ -256,11 +257,11 @@ ALTER TABLE usuarios ADD INDEX idx_nombre(nombre(10), apellidos(20));;
 | Optimizar tabla            | `OPTIMIZE TABLE nombre_tabla;`                                        | Reorganiza el almacenamiento de una tabla para mejorar el rendimiento. |
 
 
-## Prácticando índices
+### Prácticando índices
 
 Supongamos que tenemos una base de datos para gestionar una tienda en línea que vende productos electrónicos. La base de datos tiene dos tablas principales: productos y pedidos.
 
-#### Tabla `productos`:
+##### Tabla `productos`:
 
 | Columna   | Tipo          | Descripción                        |
 |-----------|---------------|------------------------------------|
@@ -381,7 +382,7 @@ A continuación realiza:
   2 rows in set (0.09 sec)
   ```
 
-### Un Ejemplo (Jardinería)
+#### Un Ejemplo (Jardinería)
 
 Suponga que estamos trabajando con la base de datos [jardineria](file/jardineria.sql) y queremos optimizar la siguiente consulta.
 
@@ -479,7 +480,7 @@ WHERE pais = 'France';
 
 De nuevo tenemos que fijarnos en los valores que nos aparecen en las columnas ___type y rows___. En este caso ambos valores han cambiado, ahora type es igual a _ref_, y por lo tanto ya no es necesario realizar un escaneo completo de todas las filas de la tabla. Y el valor de _rows es igual a 2_, que quiere decir que en este caso ha tenido que examinar solamente __2 filas__.
 
-#### Ejemplo 2 (FULLTEXT INDEX)
+##### Ejemplo 2 (FULLTEXT INDEX)
 
 Suponga que estamos trabajando con la base de datos jardineria y queremos buscar todos los productos que contienen la palabra acero en el nombre o en la descripción del producto. Una posible solución podrías ser esta:
 
@@ -521,7 +522,7 @@ FROM producto
 WHERE MATCH(nombre, descripcion) AGAINST ('acero');
 ```
 
-### Ejemplo 3 (FULLTEXT INDEX)
+#### Ejemplo 3 (FULLTEXT INDEX)
 
 En este ejemplo vamos a trabajar con una base de datos llamada viajes que contiene la tabla lugares que almacena en una columna la descripción con texto enriquecido con etiquetas HTML.
 
@@ -558,7 +559,7 @@ FROM lugares
 WHERE descripcion LIKE '%museo del Louvre%';
 ```
 
-#### Paso 1
+##### Paso 1
 
 La primera solución que vamos a realizar consiste en utilizar la función __REGEXP_REPLACE__ para eliminar las etiquetas HTML que aparecen en el texto de la descripción.
 
@@ -593,7 +594,7 @@ WHERE REGEXP_REPLACE(descripcion, "<[^>]+>", "") LIKE '%museo del Louvre%';
 
 En la columna type podemos observar que es necesario realizar un escaneo completo de toda la tabla y en la columna __rows__ vemos que se han recorrido las __5__ filas que tiene la tabla.
 
-#### Paso 2
+##### Paso 2
 
 Para evitar tener que recorrer toda la tabla durante la búsqueda vamos a crear índice de tipo __FULLTEXT__ sobre la columna descripcion que es la que contiene el texto enriquecido con etiquetas.
 
@@ -638,7 +639,7 @@ WHERE MATCH(descripcion) AGAINST ('museo del Louvre');
 
 En la columna type podemos observar que no es necesario realizar un escaneo completo de toda la tabla porque está utilizando un índice de tipo FULLTEXT, y en la columna rows vemos que sólo se ha escaneado 1 fila de la tabla.
 
-#### Paso 3
+##### Paso 3
 
 Podemos mejorar la consulta anterior para hacer uso del índice de tipo FULLTEXT y filtrar únicamente las filas que coinciden con la búsqueda exacta haciendo uso de la función REGEXP_REPLACE. En este caso vamos a utilizar dos condiciones en la cláusula WHERE:
 
@@ -683,7 +684,7 @@ WHERE
 En la columna __type__ podemos observar que no es necesario realizar un escaneo completo de toda la tabla porque está utilizando un índice de tipo __FULLTEXT__, y en la columna __rows__ vemos que sólo se ha escaneado __1__ fila de la tabla.
 
 
-# Vistas en MySQL
+## Vistas en MySQL
 
 En pocas palabras, las VIEWS ___son tablas virtuales___. Por virtual, queremos decir que las tablas no almacenan ningún dato propio, sino que muestran los datos almacenados en otras tablas.
 
@@ -765,13 +766,13 @@ nombre_vista: Nombre de la vista a crear.
 - __column_list__: Listado de columnas a crear.
 - __consulta_SELECT__: Consulta __SELECT__ que queremos realizar para obtener la información que contendrá la vista.
 
-## Ventajas de usar vistas en MySQL
+### Ventajas de usar vistas en MySQL
 
 - __Privacidad de la información__: Mostramos a los usuarios con acceso a la vista únicamente la información que creamos conveniente. De esta manera no se tiene acceso a la tabla original con todas sus filas y columnas.
 - __Optimización del rendimiento de la base de datos__: Podemos crear de querys sobre vistas complejas, es decir, vistas cuya información ha sido extraída y creada a través de unas SELECT complejas. De esta manera nos ahorramos estar ejecutando queys pesadas y atacamos directamente al resultado de dichas querys.
 - __Tablas de prueba:__ Para los desarrolladores que no tengan entornos de preproducción es muy útil usar las vistas para no tener miedo a perder información.
 
-## Ejemplo Fútbol
+### Ejemplo Fútbol
 
 - Creamos la vista:
 Una vista con todas las filas y columnas de la tabla futbolistas.
